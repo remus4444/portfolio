@@ -25,7 +25,7 @@ Everything else on `projects/battery-pack.html` is a `[bracketed placeholder]` w
 ## Structure
 
 ```
-index.html                 Home: hero, project card grid, About, Contact
+index.html                 Home: header (headshot, name, intro), project cards, Contact
 projects/battery-pack.html Project page: facts row, hero image, 3D viewer, write-up
 css/style.css              All styles and design tokens
 js/main.js                 3D viewer fallback + footer year
@@ -37,12 +37,13 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 
 ## Design rules
 
-- Clean and minimal: light background, generous whitespace; let photos and CAD carry the page.
-- Fonts: Inter (body), JetBrains Mono (eyebrows, tags, captions), from Google Fonts.
-- Accent: Ohio State scarlet `#bb0000` (`#ff5a5a` in dark mode). Use sparingly.
-- All colors are tokens on `:root` in `style.css`, with a `prefers-color-scheme: dark` override. Add new colors as tokens, never hard-coded.
+- Based on https://www.vkhouri.dev: dark-only theme (near-black background, gray body text), no nav bar. A small header (round headshot, name, "Engineering Portfolio", intro) sits at the top of every page. Square-cornered project cards with a 2px border, a 200px photo, an underlined display-font title, a gray summary and a "Read more" button. Contact is icon tiles, with no form (GitHub Pages can't process one without a third-party service).
+- Fonts: Inter (body), Saira 700 (display titles; free stand-in for the reference's Industry), JetBrains Mono (captions, placeholders), from Google Fonts.
+- Accent: Ohio State scarlet, lightened to `#ff5a5a` for the dark background. Use sparingly.
+- All colors are tokens on `:root` in `style.css`. Add new colors as tokens, never hard-coded.
 - Layout: `.wrap` sets max width and side gutters with `padding-inline`. Don't override its horizontal padding with shorthand `padding` on elements that also have `.wrap` (that bug already happened once).
 - Must work at phone width (~390px): no horizontal scroll, 24px side gutters.
+- Headshot is an "MK" `.avatar` placeholder; swap in `assets/headshot.jpg` per the HTML comment.
 - Image placeholders are `<div class="ph">path</div>`. Replace with `<img src="..." alt="...">` once real images exist. Always write meaningful alt text.
 
 ## 3D model
@@ -61,9 +62,8 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 
 ## Placeholders still to fill
 
-- `you@example.com`, `YOUR-HANDLE` (LinkedIn), `YOUR-USERNAME` (GitHub) in `index.html`. The GitHub link should be `https://github.com/remus4444`.
 - `assets/resume.pdf` (linked from the hero; not yet added).
-- Cover photo, hero photo, and `model.glb` for the battery pack.
+- `assets/headshot.jpg`, plus the cover photo, hero photo, and `model.glb` for the battery pack.
 
 ## Don'ts
 
