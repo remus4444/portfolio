@@ -118,6 +118,13 @@ h2 { font-size: clamp(1.9rem, 4vw, 2.25rem); font-weight: 500; letter-spacing: -
 .content figcaption { font-size: 0.85rem; color: var(--muted); margin-top: 8px; }
 .content .ph { aspect-ratio: 16/9; }
 
+.content > h2:first-child { margin-top: 0; }
+.specs-block { margin-bottom: 48px; }
+.specs { width: 100%; border-collapse: collapse; }
+.specs th, .specs td { text-align: left; padding: 10px 0; border-bottom: 1px solid var(--line); vertical-align: top; }
+.specs th { width: 40%; padding-right: 16px; font-family: var(--mono); font-size: 0.78rem; font-weight: 400; color: var(--muted); text-transform: uppercase; letter-spacing: 0.06em; }
+.specs td { font-weight: 500; }
+
 /* 3D viewer */
 .viewer {
   margin: 28px 0; border: 2px solid var(--line);
@@ -129,8 +136,19 @@ h2 { font-size: clamp(1.9rem, 4vw, 2.25rem); font-weight: 500; letter-spacing: -
   pointer-events: none;
 }
 .viewer .missing { display: none; height: 440px; }
-.viewer.no-model model-viewer { display: none; }
+.viewer.no-model model-viewer, .viewer.no-model .load-model { display: none; }
 .viewer.no-model .missing { display: flex; }
+.content figure .viewer { margin: 0; }
+
+/* Large models wait for a click before downloading */
+.load-model {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
+  padding: 10px 20px; border: 0; cursor: pointer;
+  background: var(--raised); color: var(--text); font: 500 0.875rem var(--font);
+  transition: background .2s;
+}
+.load-model:hover { background: var(--line); }
+.load-model ~ .hint { display: none; }
 
 footer { border-top: 1px solid var(--line); padding: 32px 0; color: var(--muted); font-size: 0.9rem; margin-top: 48px; }
 

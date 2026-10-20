@@ -19,6 +19,10 @@ Use only these unless Remus provides more. Never invent numbers, specs, or outco
 - Led its mechanical redesign; mechanical engineers were assigned to him and work was managed in Notion.
 - Closed a design cycle that had been open for two years, in two months.
 - He considers it his most impressive accomplishment.
+- Tools used: SolidWorks, Simulink, Altium. (Notion was used for task tracking but isn't listed as a tool.)
+- Timeline: Aug 2026 to Nov 2026.
+- Pack specs: 576 V (6 × 96 V subsegments; "600 V" is the class name used in titles), 9.1 kWh, 138s5p, Sony VTC6 (18650) cells, 72 kg, passive cooling.
+- The redesign is essentially complete; describe it in the past tense.
 
 Everything else on `projects/battery-pack.html` is a `[bracketed placeholder]` waiting for his content: the starting state of the program, key design decisions, team process, measurable results, lessons learned. When he gives notes, write them up in clear, confident, first-person prose and replace the placeholders.
 
@@ -29,7 +33,7 @@ index.html                 Home: header (headshot, name, intro), project cards, 
 projects/battery-pack.html Project page: facts row, hero image, 3D viewer, write-up
 css/style.css              All styles and design tokens
 js/main.js                 3D viewer fallback + footer year
-assets/battery-pack/       Images (cover.jpg, etc.) and model.glb go here
+assets/battery-pack/       Images (cover.jpg, etc.) and the .glb models
 README.md                  Deploy and editing instructions for Remus
 ```
 
@@ -46,10 +50,11 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 - Headshot is an "MK" `.avatar` placeholder; swap in `assets/headshot.jpg` per the HTML comment.
 - Image placeholders are `<div class="ph">path</div>`. Replace with `<img src="..." alt="...">` once real images exist. Always write meaningful alt text.
 
-## 3D model
+## 3D models
 
-- Viewer uses Google's `<model-viewer>` (loaded from jsDelivr) and reads `../assets/battery-pack/model.glb`. If the file is missing, `main.js` shows a placeholder.
-- Target under ~10 MB. Compress with: `npx @gltf-transform/cli optimize in.glb out.glb --compress draco`.
+- Viewers use Google's `<model-viewer>` (loaded from jsDelivr). The project page has three: `accumulator.glb` (main viewer), `electronics-box.glb` and `contactor.glb` (figures under "What I did"). All are Draco-compressed SolidWorks exports. If a file is missing, `main.js` shows a placeholder.
+- Models over a few MB use `data-src` plus a `.load-model` button, so they download only when clicked. `main.js` handles this.
+- Target under ~10 MB and ~500K triangles. The accumulator (38 MB, ~12M triangles) and electronics box (8 MB, ~2.7M triangles) are still too heavy for phones; simplify with `npx @gltf-transform/cli optimize in.glb out.glb --compress meshopt --simplify true` (needs Node) or re-export from SolidWorks at coarser tessellation.
 - No Git LFS: GitHub Pages doesn't serve LFS files.
 - Anyone can download the GLB. Remus should confirm with Formula Buckeyes what geometry is OK to share; a simplified exterior is a good fallback.
 
@@ -63,7 +68,7 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 ## Placeholders still to fill
 
 - `assets/resume.pdf` (linked from the hero; not yet added).
-- `assets/headshot.jpg`, plus the cover photo, hero photo, and `model.glb` for the battery pack.
+- `assets/headshot.jpg`, plus the cover photo and hero photo for the battery pack; lighter versions of the accumulator and electronics box models.
 
 ## Don'ts
 

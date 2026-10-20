@@ -25,27 +25,65 @@
   <a class="back" href="../index.html#projects">&larr; All projects</a>
   <header class="project-head">
     <h1>600 V Battery Pack Redesign</h1>
-    <p class="lede">Leading the mechanical redesign of the FB-26 accumulator, and closing a design cycle that had been open for two years.</p>
+    <p class="lede">Led the mechanical redesign of the FB-26's 600&nbsp;V battery pack, transforming it into a design that is easier to manufacture, compliant with the rules, and safer to build and run.</p>
   </header>
-  <div class="facts"><div><span>Role</span><strong>Program lead</strong></div><div><span>Team</span><strong>Formula Buckeyes</strong></div><div><span>Season</span><strong>2026–27</strong></div><div><span>Tools</span><strong>CAD · Notion</strong></div></div>
+  <div class="facts"><div><span>Role</span><strong>Program lead</strong></div><div><span>Timeline</span><strong>Aug–Nov 2026</strong></div><div><span>Tools</span><strong>SolidWorks · Simulink · Altium</strong></div></div>
+
+  <div class="content specs-block">
+    <h2>Specs</h2>
+    <table class="specs">
+      <tr><th>Voltage</th><td>576&nbsp;V (6 × 96&nbsp;V subsegments)</td></tr>
+      <tr><th>Energy</th><td>9.1&nbsp;kWh</td></tr>
+      <tr><th>Configuration</th><td>138s5p (690 cells)</td></tr>
+      <tr><th>Cells</th><td>Sony VTC6 (18650 lithium-ion)</td></tr>
+      <tr><th>Pack mass</th><td>72&nbsp;kg</td></tr>
+      <tr><th>Cooling</th><td>Passive</td></tr>
+    </table>
+  </div>
 
   <div class="hero-media"><div class="ph">../assets/battery-pack/cover.jpg: hero photo</div></div>
 
   <article class="content">
     <h2>3D model</h2>
     <div class="viewer">
-      <model-viewer src="../assets/battery-pack/model.glb" camera-controls auto-rotate shadow-intensity="0.6" exposure="1" alt="3D model of the 600 V Battery Pack Redesign"></model-viewer>
-      <div class="missing ph">Export your CAD as GLB to assets/battery-pack/model.glb</div>
+      <model-viewer data-src="../assets/battery-pack/accumulator.glb" camera-controls auto-rotate shadow-intensity="0.6" exposure="1" alt="3D model of the redesigned 600 V accumulator assembly"></model-viewer>
+      <button class="load-model" type="button">Load 3D model (40&nbsp;MB)</button>
+      <div class="missing ph">assets/battery-pack/accumulator.glb</div>
       <span class="hint">Drag to rotate · scroll to zoom</span>
     </div>
 <h2>The problem</h2>
-<p>[Describe the state of the pack program when you took it over: what was unresolved, and why the design cycle had stalled for two years.]</p>
+<p>When Formula Buckeyes switched from internal combustion to electric, the battery pack was run primarily as an electrical engineering project. That focus produced strong electronics, but the mechanical design hadn't received the same attention: the pack didn't meet several FSAE rules, was expensive to produce, and couldn't be assembled safely. As a result, the team went its first two electric seasons without a functioning battery pack.</p>
 <h2>What I did</h2>
+<p>Rather than starting from scratch, I kept the pack's core concept and treated three of its existing elements as fixed constraints for the rest of the design:</p>
 <ul>
-<li>Took over the 600&nbsp;V battery pack program for the 2026–27 season.</li>
-<li>Led the mechanical redesign with a team of assigned mechanical engineers, tracking work in Notion.</li>
-<li>[Key design decisions: module layout, enclosure structure, cooling, mounting, rules compliance.]</li>
+<li>The module layout</li>
+<li>Passive cooling</li>
+<li>The expensive, sponsor-manufactured main containment case</li>
 </ul>
+<p>Within those constraints:</p>
+<ul>
+<li>Led the mechanical redesign with a team of assigned mechanical engineers, tracking work in Notion.</li>
+<li>Consolidated the electronics into a single main housing, shrinking the overall PCB footprint by a factor of three.</li>
+<li>Redesigned the contactor assemblies to improve safety and rules compliance while cutting manufacturing cost and making them easier to assemble.</li>
+<li>Reworked portions of the six 96&nbsp;V subsegments to allow secure connections and voltage tapping from one subsegment to the next.</li>
+</ul>
+<figure>
+  <div class="viewer">
+    <model-viewer data-src="../assets/battery-pack/electronics-box.glb" orientation="0deg -90deg 0deg" camera-controls auto-rotate shadow-intensity="0.6" exposure="1" alt="3D model of the consolidated electronics box and its supporting board stackup"></model-viewer>
+    <button class="load-model" type="button">Load 3D model (8&nbsp;MB)</button>
+    <div class="missing ph">assets/battery-pack/electronics-box.glb</div>
+    <span class="hint">Drag to rotate · scroll to zoom</span>
+  </div>
+  <figcaption>Electronics box: the consolidated main housing and its supporting board stackup.</figcaption>
+</figure>
+<figure>
+  <div class="viewer">
+    <model-viewer src="../assets/battery-pack/contactor.glb" orientation="0deg -90deg 0deg" camera-controls auto-rotate shadow-intensity="0.6" exposure="1" alt="3D model of the redesigned positive contactor assembly"></model-viewer>
+    <div class="missing ph">assets/battery-pack/contactor.glb</div>
+    <span class="hint">Drag to rotate · scroll to zoom</span>
+  </div>
+  <figcaption>Positive contactor assembly.</figcaption>
+</figure>
 <h2>Result</h2>
 <p>Closed a design cycle that had been open for two years in two months. [Add measurable outcomes: mass, volume, part count, schedule.]</p>
 <h2>What I'd do differently</h2>
