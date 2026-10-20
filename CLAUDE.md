@@ -65,10 +65,29 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 - Show changes as diffs and let Remus review before committing. Small, focused commits with plain-English messages.
 - Before finishing visual changes, check both desktop and phone widths.
 
+## Writing style
+
+- Remus gives rough notes; turn them into polished, confident first-person prose and show him the result.
+- Keep it neutral and non-blaming, especially about the pack's history (credit the earlier electrical work; state problems as facts).
+- Plain and understated. He found the old hero tagline ("I design and build electric race car systems") cringeworthy; avoid slogans and hype.
+- Keep his team's terms (e.g. "main containment case", "subsegments"), and don't expand them into generic jargon.
+
 ## Placeholders still to fill
 
 - `assets/resume.pdf` (linked from the hero; not yet added).
 - `assets/headshot.jpg`, plus the cover photo and hero photo for the battery pack; lighter versions of the accumulator and electronics box models.
+
+## Open questions and next steps
+
+Raised with Remus but not yet answered (as of 2026-10-20):
+
+1. **"Two months" vs timeline.** The card and page say the design cycle closed "in two months", but the facts row says Aug–Nov 2026 (about three). Either clarify what the two months covers or change the claim.
+2. **600 V vs 576 V.** The title, subtitle and home card say "600 V"; the specs table says 576 V (6 × 96 V, fully charged). Currently treating 600 V as the class name; confirm or switch to 576 V.
+3. **Result section** still needs measurable outcomes (mass, cost, part count, schedule).
+4. **"What I'd do differently"** still needs one or two honest lessons.
+5. **Model weight.** Accumulator (~40 MB, ~12M triangles, 23 translucent parts) and electronics box (~8 MB, ~2.7M triangles) are too heavy for phones. Next step is simplifying them, by re-exporting from SolidWorks at coarser tessellation or running gltf-transform (needs Node). Also check the accumulator for flickering translucent parts.
+6. **Z-up orientation** on the electronics box and contactor (`orientation="0deg -90deg 0deg"`) hasn't been visually confirmed; flip to `90deg` if they appear upside down.
+7. **Sharing approval.** Remus should confirm with Formula Buckeyes that the published models are OK to share.
 
 ## Don'ts
 
