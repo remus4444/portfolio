@@ -4,36 +4,46 @@ Personal engineering portfolio for **Mehmet Kara** (goes by Remus), a mechanical
 
 Live at **https://remus4444.github.io/portfolio** (GitHub Pages, deploys from `main` / root on every push).
 
-## Current scope: one project only
+## Current scope
 
-The site features **only the 600 V accumulator (battery pack) redesign** for the FB-26. The goal is to perfect this one page before adding others.
+Four projects, in this order on the home page:
 
-- Do **not** add, mention, or suggest other projects anywhere on the site unless Remus asks.
-- Keep the About section and the hero focused on the accumulator.
+1. **FB26 600 V Battery Pack** (the accumulator redesign) (`projects/battery-pack.html`): the most complete page.
+2. **Driver-in-the-Loop Simulator** (`projects/driver-in-the-loop-simulator.html`). Known so far: one of the first FSAE driver-in-the-loop simulators in the USA; a high-fidelity, real-time vehicle simulation used for driver training and system development, year-round and at low cost.
+3. **FSAE Battery Testing and Simulation** (`projects/battery-testing-model.html`). Known so far: the team's first battery testing and simulation program; industry-grade equipment and test procedures; predictive cell models in Simulink; guides cell selection and pack design for future years.
+4. **FB26 Suspension Design** (`projects/fb26-suspension.html`). Known so far: overhauled the suspension kinematics after a chassis redesign; improved vehicle characteristics while reducing part complexity and compliance; done in record time using a new suspension development workflow.
+
+Projects 2–4 are empty shells (added 2026-10-20) that use the battery pack page's section layout, with every section a `[bracketed placeholder]`. Remus hasn't given any facts about them yet, so don't fill them in until he does. Don't add or suggest further projects unless he asks.
 
 ## Known facts about the accumulator project
 
 Use only these unless Remus provides more. Never invent numbers, specs, or outcomes.
 
-- Took over the 600 V battery pack program for the 2026–27 season.
+- Took over the 576 V battery pack program for the 2026–27 season.
 - Led its mechanical redesign; mechanical engineers were assigned to him and work was managed in Notion.
-- Closed a design cycle that had been open for two years, in two months.
+- Closed a design cycle that had been open for two years, in three months (Aug–Nov 2026).
 - He considers it his most impressive accomplishment.
 - Tools used: SolidWorks, Simulink, Altium. (Notion was used for task tracking but isn't listed as a tool.)
 - Timeline: Aug 2026 to Nov 2026.
-- Pack specs: 576 V (6 × 96 V subsegments; "600 V" is the class name used in titles), 9.1 kWh, 138s5p, Sony VTC6 (18650) cells, 72 kg, passive cooling.
+- Pack specs: 576 V (6 × 96 V subsegments), 9.1 kWh, 138s5p, Sony VTC6 (18650) cells, 69 kg, passive cooling. Project titles (page title, h1, home card heading) say "600 V" because it's more eye-catching and close to correct; everywhere else (specs, body text, card summary) says 576 V.
+- It is the team's first functioning pack, and that is the main accomplishment. Its metrics are modest because the cells and module layout were inherited and out of scope. Frame results that way, not as impressive numbers.
+- The electronics box consolidated the electronics in the top-box into one main housing, shrinking the PCB footprint by a factor of three. The freed top-box space went to larger, rules-compliant maintenance plugs (no before/after footprint numbers; Remus chose not to add them). It holds five boards: precharge discharge board, precharge discharge daughter board (relays that switch the contactors), high voltage detection board (alerts other subsystems, e.g. the safety board), high voltage indicator board (LED visible on the lid) and insulation measurement device (shuts the pack down on an insulation fault). Much of the e-box effort was coordinating with the electronics subteam on connector vertical clearance (install and wire bend) and efficient wire routing. Remus wrote a 20-page build guide so any member could assemble it.
+- Lessons: keep design reviews on the schedule (an extra hour per subassembly would have avoided an unnecessary revision); prototype test-fit parts in PLA before printing in PC-FR (expensive, scarce).
+- The contactor assembly is no longer showcased. Don't add it back.
+- **The internal resistance table and the thermal chart (autocross current profile) use FAKE placeholder numbers**, marked "Placeholder data" on the page. Replace them with Remus's real test data, and don't treat them as facts.
 - The redesign is essentially complete; describe it in the past tense.
 
-Everything else on `projects/battery-pack.html` is a `[bracketed placeholder]` waiting for his content: the starting state of the program, key design decisions, team process, measurable results, lessons learned. When he gives notes, write them up in clear, confident, first-person prose and replace the placeholders.
+Everything else on `projects/battery-pack.html` is a `[bracketed placeholder]` waiting for his content (e.g. the IR test method). When he gives notes, write them up in clear, confident, first-person prose and replace the placeholders.
 
 ## Structure
 
 ```
-index.html                 Home: header (headshot, name, intro), project cards, Contact
-projects/battery-pack.html Project page: facts row, hero image, 3D viewer, write-up
+index.html                 Home: top bar, hero, project cards, Contact
+projects/*.html            One page per project (see Current scope); the three newer ones are placeholder shells
+projects/battery-pack.html Project page: facts row, then 3D model, Specs, The problem, What I did, Subsystem showcases (Electronics box), Gallery, Results, What I'd do differently
 css/style.css              All styles and design tokens
-js/main.js                 3D viewer fallback + footer year
-assets/battery-pack/       Images (cover.jpg, etc.) and the .glb models
+js/main.js                 3D viewer fallback, gallery lightbox, chart hover, footer year
+assets/<project>/          Images (cover.jpg, etc.) and .glb models, one folder per project
 README.md                  Deploy and editing instructions for Remus
 ```
 
@@ -41,22 +51,25 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 
 ## Design rules
 
-- Based on https://www.vkhouri.dev: dark-only theme (near-black background, gray body text), no nav bar. A small header (round headshot, name, "Engineering Portfolio", intro) sits at the top of every page. Square-cornered project cards with a 2px border, a 200px photo, an underlined display-font title, a gray summary and a "Read more" button. Contact is icon tiles, with no form (GitHub Pages can't process one without a third-party service).
+- Dark-only theme (near-black background, gray body text). Originally modeled on https://www.vkhouri.dev, but the home page was redesigned on 2026-10-20 because it looked like a copy of that site. Don't drift back toward it: no round avatar plus name block, no icon-tile contact, no underlined card titles or "Read more" buttons.
+- Every page has a slim top bar: "Home" (display font) on the left, Projects / Résumé / Contact links on the right. Don't put his name in the bar; the hero already shows it.
+- Home: hero with a very large display-font name, the intro, Download résumé and Email me buttons, and a facts row (Studying, Based in only). No eyebrow line above the name. Then project cards in a two-column grid: bordered panels (16:10 photo, title, summary, underlined "View project →") that lift on hover so they read as clickable. No numbers or category tags. Then Contact as labelled rows (Email, LinkedIn, GitHub, Résumé). No form, because GitHub Pages can't process one without a third-party service.
 - Fonts: Inter (body), Saira 700 (display titles; free stand-in for the reference's Industry), JetBrains Mono (captions, placeholders), from Google Fonts.
 - Accent: Ohio State scarlet, lightened to `#ff5a5a` for the dark background. Use sparingly.
 - All colors are tokens on `:root` in `style.css`. Add new colors as tokens, never hard-coded.
 - Layout: `.wrap` sets max width and side gutters with `padding-inline`. Don't override its horizontal padding with shorthand `padding` on elements that also have `.wrap` (that bug already happened once).
 - Must work at phone width (~390px): no horizontal scroll, 24px side gutters.
-- Headshot is an "MK" `.avatar` placeholder; swap in `assets/headshot.jpg` per the HTML comment.
+- Gallery photos are `<a href data-caption>` around an `<img>`; `main.js` opens them in a `<dialog class="lightbox">` with the caption. Save photos as JPEG (~200 KB, metadata stripped).
 - Image placeholders are `<div class="ph">path</div>`. Replace with `<img src="..." alt="...">` once real images exist. Always write meaningful alt text.
 
 ## 3D models
 
-- Viewers use Google's `<model-viewer>` (loaded from jsDelivr). The project page has three: `accumulator.glb` (main viewer), `electronics-box.glb` and `contactor.glb` (figures under "What I did"). All are Draco-compressed SolidWorks exports. If a file is missing, `main.js` shows a placeholder.
+- Viewer look: `environment-image="legacy"`, `tone-mapping="aces"`, `shadow-intensity="1"`, `shadow-softness="0.5"`, `exposure="1.1"`, chosen to give assemblies more contrast. `main.js` also caps translucent (BLEND) materials at 25% opacity so enclosures don't hide the parts inside.
+- Viewers use Google's `<model-viewer>` (loaded from jsDelivr). The project page has two: `accumulator.glb` (main viewer) and `electronics-box.glb` (under "Subsystem showcases"). All are Draco-compressed SolidWorks exports. If a file is missing, `main.js` shows a placeholder.
 - Models over a few MB use `data-src` plus a `.load-model` button, so they download only when clicked. `main.js` handles this.
 - Target under ~10 MB and ~500K triangles. The accumulator (38 MB, ~12M triangles) and electronics box (8 MB, ~2.7M triangles) are still too heavy for phones; simplify with `npx @gltf-transform/cli optimize in.glb out.glb --compress meshopt --simplify true` (needs Node) or re-export from SolidWorks at coarser tessellation.
 - No Git LFS: GitHub Pages doesn't serve LFS files.
-- Anyone can download the GLB. Remus should confirm with Formula Buckeyes what geometry is OK to share; a simplified exterior is a good fallback.
+- Formula Buckeyes approved sharing the published models (Oct 2026).
 
 ## Workflow
 
@@ -72,22 +85,20 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 - Plain and understated. He found the old hero tagline ("I design and build electric race car systems") cringeworthy; avoid slogans and hype.
 - Keep his team's terms (e.g. "main containment case", "subsegments"), and don't expand them into generic jargon.
 
+## Résumé
+
+`assets/resume.pdf` is Remus's résumé (added 2026-10-20, includes his phone number; he approved publishing it). Replace the file when he sends a new version. Its bullets are a source of facts he has stated, e.g. suspension iteration time cut 75% via a parametric CAD + kinematic solver pipeline; battery models validated to under 3% average residual; DiL simulator built at OSU's Center for Automotive Research with 98% correlation in lateral acceleration and yaw rate. Don't use the Tesla internship content on the site (see Don'ts).
+
 ## Placeholders still to fill
 
-- `assets/resume.pdf` (linked from the hero; not yet added).
-- `assets/headshot.jpg`, plus the cover photo and hero photo for the battery pack; lighter versions of the accumulator and electronics box models.
+- Cover photos for the three newer projects; lighter versions of the accumulator and electronics box models.
 
 ## Open questions and next steps
 
-Raised with Remus but not yet answered (as of 2026-10-20):
+Not yet resolved (as of 2026-10-20):
 
-1. **"Two months" vs timeline.** The card and page say the design cycle closed "in two months", but the facts row says Aug–Nov 2026 (about three). Either clarify what the two months covers or change the claim.
-2. **600 V vs 576 V.** The title, subtitle and home card say "600 V"; the specs table says 576 V (6 × 96 V, fully charged). Currently treating 600 V as the class name; confirm or switch to 576 V.
-3. **Result section** still needs measurable outcomes (mass, cost, part count, schedule).
-4. **"What I'd do differently"** still needs one or two honest lessons.
-5. **Model weight.** Accumulator (~40 MB, ~12M triangles, 23 translucent parts) and electronics box (~8 MB, ~2.7M triangles) are too heavy for phones. Next step is simplifying them, by re-exporting from SolidWorks at coarser tessellation or running gltf-transform (needs Node). Also check the accumulator for flickering translucent parts.
-6. **Z-up orientation** on the electronics box and contactor (`orientation="0deg -90deg 0deg"`) hasn't been visually confirmed; flip to `90deg` if they appear upside down.
-7. **Sharing approval.** Remus should confirm with Formula Buckeyes that the published models are OK to share.
+1. **Replace placeholder test data.** The internal resistance and thermal numbers are fake. The thermal chart is a static SVG built from a 41-point series; the same data is in the `.chart-data` JSON (for hover) and the data table. Update all three, and `main.js` if the axis ranges change.
+2. **Model weight.** Accumulator (~40 MB, ~12M triangles, 23 translucent parts) and electronics box (~8 MB, ~2.7M triangles) are too heavy for phones. Remus chose to skip this for now. Also check the accumulator for flickering translucent parts.
 
 ## Don'ts
 

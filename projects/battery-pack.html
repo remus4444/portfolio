@@ -3,56 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>600 V Battery Pack Redesign | Mehmet Kara</title>
+  <title>FB26 600 V Battery Pack | Mehmet Kara</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Saira:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
   <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4/dist/model-viewer.min.js"></script>
 </head>
 <body>
-<header class="site-head wrap">
-  <a class="id" href="../index.html">
-    <!-- Replace with: <img class="avatar" src="../assets/headshot.jpg" alt="Mehmet Kara"> -->
-    <div class="avatar" aria-hidden="true">MK</div>
-    <div>
-      <p class="name">Mehmet Kara</p>
-      <p>Engineering Portfolio</p>
-    </div>
-  </a>
+<header class="topbar">
+  <div class="wrap">
+    <a class="brand" href="../index.html">Home</a>
+    <nav>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../assets/resume.pdf">Résumé</a>
+      <a href="../index.html#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 
 <main class="wrap">
   <a class="back" href="../index.html#projects">&larr; All projects</a>
   <header class="project-head">
-    <h1>600 V Battery Pack Redesign</h1>
-    <p class="lede">Led the mechanical redesign of the FB-26's 600&nbsp;V battery pack, transforming it into a design that is easier to manufacture, compliant with the rules, and safer to build and run.</p>
+    <h1>FB26 600 V Battery Pack</h1>
+    <p class="lede">Led the mechanical redesign of the FB-26's 576&nbsp;V battery pack, transforming it into a design that is easier to manufacture, compliant with the rules, and safer to build and run.</p>
   </header>
   <div class="facts"><div><span>Role</span><strong>Program lead</strong></div><div><span>Timeline</span><strong>Aug–Nov 2026</strong></div><div><span>Tools</span><strong>SolidWorks · Simulink · Altium</strong></div></div>
-
-  <div class="content specs-block">
-    <h2>Specs</h2>
-    <table class="specs">
-      <tr><th>Voltage</th><td>576&nbsp;V (6 × 96&nbsp;V subsegments)</td></tr>
-      <tr><th>Energy</th><td>9.1&nbsp;kWh</td></tr>
-      <tr><th>Configuration</th><td>138s5p (690 cells)</td></tr>
-      <tr><th>Cells</th><td>Sony VTC6 (18650 lithium-ion)</td></tr>
-      <tr><th>Pack mass</th><td>72&nbsp;kg</td></tr>
-      <tr><th>Cooling</th><td>Passive</td></tr>
-    </table>
-  </div>
-
-  <div class="hero-media"><div class="ph">../assets/battery-pack/cover.jpg: hero photo</div></div>
 
   <article class="content">
     <h2>3D model</h2>
     <div class="viewer">
-      <model-viewer data-src="../assets/battery-pack/accumulator.glb" camera-controls auto-rotate shadow-intensity="0.6" exposure="1" alt="3D model of the redesigned 600 V accumulator assembly"></model-viewer>
+      <model-viewer data-src="../assets/battery-pack/accumulator.glb" camera-controls auto-rotate environment-image="legacy" tone-mapping="aces" shadow-intensity="1" shadow-softness="0.5" exposure="1.1" alt="3D model of the redesigned 576 V accumulator assembly"></model-viewer>
       <button class="load-model" type="button">Load 3D model (40&nbsp;MB)</button>
       <div class="missing ph">assets/battery-pack/accumulator.glb</div>
       <span class="hint">Drag to rotate · scroll to zoom</span>
     </div>
+<h2>Specs</h2>
+<table class="specs">
+  <tr><th>Voltage</th><td>576&nbsp;V (6 × 96&nbsp;V subsegments)</td></tr>
+  <tr><th>Energy</th><td>9.1&nbsp;kWh</td></tr>
+  <tr><th>Configuration</th><td>138s5p (690 cells)</td></tr>
+  <tr><th>Cells</th><td>Sony VTC6 (18650 lithium-ion)</td></tr>
+  <tr><th>Pack mass</th><td>69&nbsp;kg</td></tr>
+  <tr><th>Cooling</th><td>Passive</td></tr>
+</table>
 <h2>The problem</h2>
-<p>When Formula Buckeyes switched from internal combustion to electric, the battery pack was run primarily as an electrical engineering project. That focus produced strong electronics, but the mechanical design hadn't received the same attention: the pack didn't meet several FSAE rules, was expensive to produce, and couldn't be assembled safely. As a result, the team went its first two electric seasons without a functioning battery pack.</p>
+<p>When Formula Buckeyes switched from internal combustion to electric, the battery pack was run primarily as an electrical engineering project. That focus produced strong electronics, but the mechanical design hadn't received the same attention. The pack didn't meet several FSAE rules, was expensive to produce, and couldn't be assembled safely. As a result, the team went its first two electric seasons without a functioning battery pack.</p>
 <h2>What I did</h2>
 <p>Rather than starting from scratch, I kept the pack's core concept and treated three of its existing elements as fixed constraints for the rest of the design:</p>
 <ul>
@@ -63,31 +58,109 @@
 <p>Within those constraints:</p>
 <ul>
 <li>Led the mechanical redesign with a team of assigned mechanical engineers, tracking work in Notion.</li>
-<li>Consolidated the electronics into a single main housing, shrinking the overall PCB footprint by a factor of three.</li>
-<li>Redesigned the contactor assemblies to improve safety and rules compliance while cutting manufacturing cost and making them easier to assemble.</li>
 <li>Reworked portions of the six 96&nbsp;V subsegments to allow secure connections and voltage tapping from one subsegment to the next.</li>
+<li>Designed portions of the top-box, the section where the control electronics are stored, helping to shrink packaging footprints and improve manufacturability.</li>
 </ul>
+<h2>Subsystem showcases</h2>
+<h3>Electronics box</h3>
+<p>The pack's electronics used to be spread across the top-box. I consolidated them into a single main housing, the electronics box, which shrank the overall PCB footprint by a factor of three. The freed space in the top-box went to larger maintenance plugs that meet the FSAE rules. The electronics box holds five boards:</p>
+<ul>
+<li><strong>Precharge discharge board:</strong> controls the contactors so the motor controllers are charged and discharged gradually, avoiding a short-circuit-like current surge when the pack is switched on or off.</li>
+<li><strong>Precharge discharge daughter board:</strong> takes commands from the precharge discharge board and uses relays to physically switch the contactors.</li>
+<li><strong>High voltage detection board:</strong> detects the presence of high voltage and alerts other subsystems, such as the safety board.</li>
+<li><strong>High voltage indicator board:</strong> detects the presence of high voltage and lights an LED, visible on the lid, to warn people once the pack is assembled.</li>
+<li><strong>Insulation measurement device:</strong> monitors the insulation between the high-voltage system and the chassis, and shuts down the pack if it detects a break.</li>
+</ul>
+<p>Much of the work on the electronics box was coordination with the electronics subteam. Together we made sure every connector had enough vertical space to be installed and for its wires to bend, and that the wiring routed through the box efficiently.</p>
+<p>I also wrote a 20-page build guide for the box so that any team member could assemble it easily.</p>
 <figure>
   <div class="viewer">
-    <model-viewer data-src="../assets/battery-pack/electronics-box.glb" orientation="0deg -90deg 0deg" camera-controls auto-rotate shadow-intensity="0.6" exposure="1" alt="3D model of the consolidated electronics box and its supporting board stackup"></model-viewer>
+    <model-viewer data-src="../assets/battery-pack/electronics-box.glb" orientation="0deg -90deg 0deg" camera-controls auto-rotate environment-image="legacy" tone-mapping="aces" shadow-intensity="1" shadow-softness="0.5" exposure="1.1" alt="3D model of the consolidated electronics box and its supporting board stackup"></model-viewer>
     <button class="load-model" type="button">Load 3D model (8&nbsp;MB)</button>
     <div class="missing ph">assets/battery-pack/electronics-box.glb</div>
     <span class="hint">Drag to rotate · scroll to zoom</span>
   </div>
   <figcaption>Electronics box: the consolidated main housing and its supporting board stackup.</figcaption>
 </figure>
+<h2>Gallery</h2>
+<div class="gallery">
+  <a href="../assets/battery-pack/first-power-up.jpg" data-caption="The accumulator assembled to full voltage for the first time."><img src="../assets/battery-pack/first-power-up.jpg" alt="The closed accumulator on an orange insulating mat, with its orange high-voltage connector on the lid" loading="lazy"></a>
+  <a href="../assets/battery-pack/lid-off.jpg" data-caption="The accumulator with its lid off, showing the inside."><img src="../assets/battery-pack/lid-off.jpg" alt="The accumulator with its lid off, showing the electronics box, wiring harnesses and connectors on top of the main containment case" loading="lazy"></a>
+  <a href="../assets/battery-pack/arc-flash-assembly.jpg" data-caption="Assembling the accumulator in arc flash suits."><img src="../assets/battery-pack/arc-flash-assembly.jpg" alt="Two team members in arc flash suits and face shields assembling the accumulator on a workbench" loading="lazy"></a>
+</div>
+<dialog class="lightbox">
+  <figure>
+    <img src="" alt="">
+    <figcaption></figcaption>
+  </figure>
+  <button class="close" type="button" aria-label="Close">&times;</button>
+</dialog>
+<h2>Results</h2>
+<p>The FB-26 pack is Formula Buckeyes' first functioning accumulator. I closed a design cycle that had been open for two years in three months.</p>
+<p>Its performance numbers are modest. The cell choice and module layout were inherited, and changing them was outside the scope of this redesign. The goal was a pack the team could build, run and learn from, and that is what this one is.</p>
+<!-- PLACEHOLDER DATA: the internal resistance and thermal figures below are made up. Replace them with real test results before publishing. -->
+<h3>Internal resistance</h3>
+<p class="tbd">Placeholder data</p>
+<p>[Describe the test method, e.g. DC pulse current and duration.]</p>
+<table class="specs">
+  <tr><th>Subsegment 1</th><td>86.1&nbsp;mΩ</td></tr>
+  <tr><th>Subsegment 2</th><td>85.4&nbsp;mΩ</td></tr>
+  <tr><th>Subsegment 3</th><td>87.0&nbsp;mΩ</td></tr>
+  <tr><th>Subsegment 4</th><td>85.9&nbsp;mΩ</td></tr>
+  <tr><th>Subsegment 5</th><td>88.2&nbsp;mΩ</td></tr>
+  <tr><th>Subsegment 6</th><td>86.6&nbsp;mΩ</td></tr>
+  <tr><th>Full pack</th><td>528&nbsp;mΩ (including interconnects)</td></tr>
+</table>
+<h3>Thermal: autocross current profile</h3>
+<p class="tbd">Placeholder data</p>
+<p>I ran an autocross current profile back to back for 20 minutes. With passive cooling, the hottest cell peaked at 49.2&nbsp;°C, below the 60&nbsp;°C cell limit.</p>
 <figure>
-  <div class="viewer">
-    <model-viewer src="../assets/battery-pack/contactor.glb" orientation="0deg -90deg 0deg" camera-controls auto-rotate shadow-intensity="0.6" exposure="1" alt="3D model of the redesigned positive contactor assembly"></model-viewer>
-    <div class="missing ph">assets/battery-pack/contactor.glb</div>
-    <span class="hint">Drag to rotate · scroll to zoom</span>
+  <div class="chart">
+    <p class="chart-legend"><span class="key s1"></span>Max cell <span class="key s2"></span>Average cell</p>
+    <div class="chart-plot">
+      <svg viewBox="0 0 720 360" role="img" aria-label="Cell temperature over 20 minutes of a repeated autocross current profile. Maximum cell temperature rises from 25 to a peak of 49.2 °C; average cell temperature rises from 25 to 41.4 °C. Both stay below the 60 °C limit.">
+<line class="grid" x1="56" x2="664" y1="316.0" y2="316.0"/><text class="tick" x="48" y="320.0" text-anchor="end">20</text>
+<line class="grid" x1="56" x2="664" y1="251.1" y2="251.1"/><text class="tick" x="48" y="255.1" text-anchor="end">30</text>
+<line class="grid" x1="56" x2="664" y1="186.2" y2="186.2"/><text class="tick" x="48" y="190.2" text-anchor="end">40</text>
+<line class="grid" x1="56" x2="664" y1="121.3" y2="121.3"/><text class="tick" x="48" y="125.3" text-anchor="end">50</text>
+<line class="grid" x1="56" x2="664" y1="56.4" y2="56.4"/><text class="tick" x="48" y="60.4" text-anchor="end">60</text>
+<text class="tick x" x="56.0" y="336" text-anchor="middle">0</text>
+<text class="tick x" x="208.0" y="336" text-anchor="middle">5</text>
+<text class="tick x" x="360.0" y="336" text-anchor="middle">10</text>
+<text class="tick x" x="512.0" y="336" text-anchor="middle">15</text>
+<text class="tick x" x="664.0" y="336" text-anchor="middle">20</text>
+<line class="limit" x1="56" x2="664" y1="56.4" y2="56.4"/><text class="note" x="62" y="50.4">60 °C cell limit</text>
+<polyline class="s2" points="56.0,283.6 71.2,275.8 86.4,269.9 101.6,266.7 116.8,262.8 132.0,258.2 147.2,251.8 162.4,245.3 177.6,241.4 192.8,238.8 208.0,236.8 223.2,232.9 238.4,227.8 253.6,223.2 268.8,220.0 284.0,218.7 299.2,217.4 314.4,214.8 329.6,210.2 344.8,206.3 360.0,203.7 375.2,203.7 390.4,203.1 405.6,201.1 420.8,197.3 436.0,194.0 451.2,192.1 466.4,192.1 481.6,192.7 496.8,190.8 512.0,187.5 527.2,184.9 542.4,183.6 557.6,184.3 572.8,184.3 588.0,183.0 603.2,180.4 618.4,177.8 633.6,177.1 648.8,177.8 664.0,178.4"/><polyline class="s1" points="56.0,283.6 71.2,270.6 86.4,261.5 101.6,257.0 116.8,251.8 132.0,244.6 147.2,233.6 162.4,223.9 177.6,217.4 192.8,214.8 208.0,212.2 223.2,207.0 238.4,197.9 253.6,190.1 268.8,185.6 284.0,184.9 299.2,183.6 314.4,179.7 329.6,172.6 344.8,166.1 360.0,162.9 375.2,162.9 390.4,163.5 405.6,160.3 420.8,154.4 436.0,148.6 451.2,146.6 466.4,147.9 481.6,148.6 496.8,146.6 512.0,140.8 527.2,136.3 542.4,135.0 557.6,136.9 572.8,138.2 588.0,136.9 603.2,131.7 618.4,127.2 633.6,126.5 648.8,129.1 664.0,131.1"/>
+<text class="label" x="670" y="135.1">Max</text><text class="label" x="670" y="182.4">Avg</text>
+<line class="cross" x1="0" x2="0" y1="24" y2="316" hidden/>
+<circle class="dot s1" r="5" hidden/><circle class="dot s2" r="5" hidden/>
+      </svg>
+      <div class="chart-tip" hidden></div>
+    </div>
+    <details>
+      <summary>Show data table</summary>
+      <table class="data">
+        <tr><th>Time (min)</th><th>Max cell (°C)</th><th>Average cell (°C)</th></tr>
+          <tr><td>0</td><td>25.0</td><td>25.0</td></tr>
+          <tr><td>2</td><td>29.9</td><td>28.2</td></tr>
+          <tr><td>4</td><td>35.2</td><td>31.5</td></tr>
+          <tr><td>6</td><td>38.2</td><td>33.6</td></tr>
+          <tr><td>8</td><td>40.4</td><td>35.2</td></tr>
+          <tr><td>10</td><td>43.6</td><td>37.3</td></tr>
+          <tr><td>12</td><td>44.9</td><td>38.3</td></tr>
+          <tr><td>14</td><td>45.8</td><td>39.0</td></tr>
+          <tr><td>16</td><td>47.9</td><td>40.4</td></tr>
+          <tr><td>18</td><td>48.4</td><td>40.9</td></tr>
+          <tr><td>20</td><td>48.5</td><td>41.2</td></tr>
+      </table>
+    </details>
   </div>
-  <figcaption>Positive contactor assembly.</figcaption>
+  <figcaption>Cell temperature (°C) vs time (min) during a repeated autocross current profile.</figcaption>
+  <script type="application/json" class="chart-data">{"t":[0.0,0.5,1.0,1.5,2.0,2.5,3.0,3.5,4.0,4.5,5.0,5.5,6.0,6.5,7.0,7.5,8.0,8.5,9.0,9.5,10.0,10.5,11.0,11.5,12.0,12.5,13.0,13.5,14.0,14.5,15.0,15.5,16.0,16.5,17.0,17.5,18.0,18.5,19.0,19.5,20.0],"max":[25.0,27.0,28.4,29.1,29.9,31.0,32.7,34.2,35.2,35.6,36.0,36.8,38.2,39.4,40.1,40.2,40.4,41.0,42.1,43.1,43.6,43.6,43.5,44.0,44.9,45.8,46.1,45.9,45.8,46.1,47.0,47.7,47.9,47.6,47.4,47.6,48.4,49.1,49.2,48.8,48.5],"avg":[25.0,26.2,27.1,27.6,28.2,28.9,29.9,30.9,31.5,31.9,32.2,32.8,33.6,34.3,34.8,35.0,35.2,35.6,36.3,36.9,37.3,37.3,37.4,37.7,38.3,38.8,39.1,39.1,39.0,39.3,39.8,40.2,40.4,40.3,40.3,40.5,40.9,41.3,41.4,41.3,41.2]}</script>
 </figure>
-<h2>Result</h2>
-<p>Closed a design cycle that had been open for two years in two months. [Add measurable outcomes: mass, volume, part count, schedule.]</p>
 <h2>What I'd do differently</h2>
-<p>[One or two honest lessons. Recruiters read this section.]</p>
+<p>I'd keep design reviews on the schedule even when the timeline got tight. As our schedule compressed, reviews were the first thing to go. Spending an extra hour on each subassembly would have caught the small errors that later forced an unnecessary revision.</p>
+<p>I'd also stop printing parts directly in our production material, PC-FR, which is expensive and hard to get. Instead I'd print test-fit prototypes in PLA first and move to PC-FR only once the fit was confirmed.</p>
   </article>
 
 </main>
