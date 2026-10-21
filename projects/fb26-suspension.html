@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Saira:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
-  <!-- When adding a 3D model, also add the model-viewer <script> line from battery-pack.html -->
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@google/model-viewer@4/dist/model-viewer.min.js"></script>
 </head>
 <body>
 <header class="topbar">
@@ -25,31 +25,50 @@
   <a class="back" href="../index.html#projects">&larr; All projects</a>
   <header class="project-head">
     <h1>FB26 Suspension Design</h1>
-    <p class="lede">[One-sentence summary of what you did and why it mattered.]</p>
+    <p class="lede">Redesigned the FB26 suspension around a new rear chassis, overhauling the kinematics and building a faster design workflow to reduce part complexity and compliance.</p>
   </header>
-  <div class="facts"><div><span>Role</span><strong>[Role]</strong></div><div><span>Timeline</span><strong>[Start–End]</strong></div><div><span>Tools</span><strong>[Tools]</strong></div></div>
+  <div class="facts"><div><span>Role</span><strong>Suspension design lead</strong></div><div><span>Timeline</span><strong>Jul–Aug 2025</strong></div><div><span>Tools</span><strong>SolidWorks · Excel · Lotus Shark · CarSim · ANSYS</strong></div></div>
 
   <article class="content">
     <h2>3D model</h2>
-    <!-- Replace with a viewer block from battery-pack.html once the model exists, or delete this section -->
-    <div class="viewer no-model"><div class="missing ph">assets/fb26-suspension/model.glb</div></div>
+    <div class="viewer">
+      <model-viewer data-src="../assets/fb26-suspension/suspension.glb" orientation="0deg -90deg 0deg" camera-orbit="60deg 65deg auto" camera-controls auto-rotate environment-image="legacy" tone-mapping="aces" shadow-intensity="1" shadow-softness="0.5" exposure="1.1" alt="3D model of the FB26 suspension assembly"></model-viewer>
+      <button class="load-model" type="button">Load 3D model (12&nbsp;MB)</button>
+      <div class="missing ph">assets/fb26-suspension/suspension.glb</div>
+      <span class="hint">Drag to rotate · scroll to zoom</span>
+    </div>
 <h2>Specs</h2>
 <table class="specs">
-  <tr><th>[Spec]</th><td>[Value]</td></tr>
-  <tr><th>[Spec]</th><td>[Value]</td></tr>
-  <tr><th>[Spec]</th><td>[Value]</td></tr>
+  <tr><th>Suspension</th><td>Double wishbone, pushrod</td></tr>
+  <tr><th>Wheelbase</th><td>1530&nbsp;mm</td></tr>
+  <tr><th>Track</th><td>1200&nbsp;mm front and rear</td></tr>
+  <tr><th>Wheels</th><td>Three-piece: in-house carbon fiber rims, aluminum centers</td></tr>
 </table>
 <h2>The problem</h2>
-<p>[What state the project was in when you started, and what needed to change.]</p>
-<h2>What I did</h2>
-<p>[Your approach, key constraints and design decisions.]</p>
+<p>The FB25 suspension was a quick adaptation of the FB24 design. FB24 was the team's last combustion car, with a very different chassis: a carbon fiber monocoque at the front and a tube frame at the rear. Carrying that design over to a new chassis caused three problems:</p>
 <ul>
-<li>[Contribution]</li>
-<li>[Contribution]</li>
+<li>The rear dampers were mounted to the top plane of the chassis. This hurt tractive system packaging, and the damper mounts were complex to manufacture and compliant.</li>
+<li>The rear anti-roll bar was mounted inside the chassis, connected to the rockers through holes in the chassis. This reduced chassis rigidity, made the bar very difficult to adjust and raised the risk of water getting in.</li>
+<li>The wheelbase was shortened by 55&nbsp;mm, from 1585&nbsp;mm to 1530&nbsp;mm, a big change for vehicle handling. It was done by moving the front and rear suspension closer together, without vehicle simulations to adjust the geometry for the handling the team wanted.</li>
+</ul>
+<h2>What I did</h2>
+<p>To keep the scope manageable, I treated three parts of the car as fixed constraints:</p>
+<ul>
+<li><strong>The front half of the chassis.</strong> Only a new rear chassis buck could be machined, so the front inboard suspension hardpoints couldn't move.</li>
+<li><strong>The wheels.</strong> The team was happy with our tire size and our three-piece wheels, with in-house carbon fiber rims and aluminum centers.</li>
+<li><strong>All four uprights.</strong> We didn't have the resources to machine new ones in a slow and costly 5-axis milling process, and the suspension could meet its goals without them.</li>
+</ul>
+<p>Within those constraints:</p>
+<ul>
+<li>Rebuilt the suspension kinematics in Lotus Shark, using CarSim vehicle simulations to set the geometry for the handling we wanted.</li>
+<li>Built a parametric workflow: an Excel design table drives the SolidWorks model, so a hardpoint change automatically updates both the geometry and the kinematics. This cut iteration time by 75%.</li>
+<li>Designed new rear suspension mounts that simplified manufacturing and let the rear anti-roll bar move outside the chassis.</li>
 </ul>
 <h2>Subsystem showcases</h2>
-<h3>[Subsystem]</h3>
-<p>[What it is, what you designed, and why.]</p>
+<h3>Rear suspension mounts</h3>
+<p>I replaced the FB25 rear damper mounts with pivot posts mounted in single shear to the side of the chassis, on a chamfer. Despite being single shear, they're far more rigid than the old mounts. The new layout improved tractive system packaging and let us carry front suspension components over to the rear, saving time on the CNC machine.</p>
+<h3>Rear anti-roll bar</h3>
+<p>The new mounts let me move the rear anti-roll bar from inside the chassis to the rear of it, which fixed the rigidity, adjustment and water intrusion problems of the FB25 bar. I designed it to a 35% rear roll stiffness distribution target, using CarSim to set the stiffness goals. I then ran an ANSYS Static Structural FEA sweep over material and wall thickness. The final bar landed within 0.5% of the target and was lighter than the previous design.</p>
 <h2>Gallery</h2>
 <!-- Replace each placeholder with: <a href="../assets/fb26-suspension/photo.jpg" data-caption="Caption."><img src="../assets/fb26-suspension/photo.jpg" alt="Description" loading="lazy"></a>
      and copy the <dialog class="lightbox"> block from battery-pack.html below the gallery -->
@@ -59,9 +78,10 @@
   <div class="ph">assets/fb26-suspension/photo-3.jpg</div>
 </div>
 <h2>Results</h2>
-<p>[Measurable outcomes and what the project achieved.]</p>
+<p>FB26 had the earliest suspension design handoff to manufacturing in team history: the design was handed off before the fall semester began. That meant the suspension was ready to install as soon as the chassis came out of the autoclave and was released from its molds.</p>
+<p>The car's handling balance improved a lot. It's more predictable and planted, with a neutral balance. The new mounts were simpler to manufacture and more rigid, and the rear anti-roll bar became easy to adjust.</p>
 <h2>What I'd do differently</h2>
-<p>[One or two honest lessons.]</p>
+<p>I'd involve more of the team's newer members in the design process instead of doing it all myself. Because I worked alone, I ended up the only person on the team who knew how suspension geometry design was done, which I had to fix later on.</p>
   </article>
 
 </main>
