@@ -42,16 +42,21 @@
   <tr><th>Pedals</th><td>Heusinkveld Pro pedals, matched to the car's maximum braking forces</td></tr>
 </table>
 <h2>The problem</h2>
-<p>[What state the project was in when you started, and what needed to change.]</p>
+<p>Before the simulator, the team relied entirely on physical testing. That depended on the car being finished on time and running reliably, and even then we could only test once a week or every other week.</p>
+<p>That limit affected more than driver training. On a formula car, there are only so many changes you can make to the previous year's car to validate a new design idea, and each one is expensive to try for real. Many design decisions were close to a shot in the dark, especially in the early years of the electric program, when we had no running car at all.</p>
+<p>I had already built CarSim models that ran predefined open-loop tests. They gave useful numbers, but it's hard to get a computer to drive a lap on its own in a way that makes the effect of a change easy to analyze, and they couldn't train drivers. Buying a DiL wasn't a realistic option either. The off-the-shelf choices are essentially racing games with little room for modification, so we couldn't, for example, add our own tire model or link them to Simulink.</p>
+<p>The goal was a simulator that felt as close to driving the real car as possible. The seating position, steering torque, pedal forces and audio cues all had to match, and it had to run consistently in real time at 1&nbsp;kHz or faster, with headroom for future features.</p>
 <h2>What I did</h2>
-<p>[Your approach, key constraints and design decisions.]</p>
-<ul>
-<li>[Contribution]</li>
-<li>[Contribution]</li>
-</ul>
-<h2>Subsystem showcases</h2>
-<h3>[Subsystem]</h3>
-<p>[What it is, what you designed, and why.]</p>
+<p>I built the simulator largely on my own, from the vehicle model and software to the rig and data pipeline.</p>
+<h3>Matching the real car</h3>
+<p>I took the driver's seating position, pedal height and steering wheel location directly from the car's CAD model. For the pedals, I took the maximum brake pressure reached during a lap from our DAQ data and back-calculated the pedal force needed to produce it. The steering torque came from the steering torque channel in our existing CarSim vehicle model. I also had a team member design a steering wheel with a custom PCB, so the sim wheel has the same layout and buttons as the real FSAE wheel and connects over USB.</p>
+<h3>Real-time performance</h3>
+<p>Holding 1&nbsp;kHz took changes to both the hardware and the physics. I worked with the IT department to strip a powerful PC down to only what the simulation needs, removing security software and other background processes. My first approach was a multibody simulation in Simulink, but I moved to CarSim as the primary physics engine, with Simulink running alongside it as a co-simulation for specific tasks. I also tested different solvers, moving from Euler to second-order Adams–Bashforth (AB-2).</p>
+<h3>Data</h3>
+<p>The physics PC stays offline. It streams data over UDP to a separate PC that handles analysis and anything that needs the internet. Logs are converted automatically so they appear in MoTeC i2 in the same format as the real car's, which lets us compare simulation and track data directly.</p>
+<h3>Simulink integration</h3>
+<p>Running Simulink alongside CarSim lets us send signals outside the CarSim environment and add our own plant models. The Simulink model handles all communication with the steering wheel and pedals, and sends live data to SimHub, which runs the driver display. It also runs our custom battery and motor models, so we can simulate the whole powertrain and get realistic motor torque, voltage and temperatures over a lap.</p>
+<p>Because our vehicle control unit (VCU) software is also built in Simulink, the DiL runs the same control systems as the real car. We develop new control strategies in the simulator with real driver feedback before deploying them to the VCU for track testing. That has been crucial for trying different control methods and for catching bugs before they reach the car.</p>
 <h2>Gallery</h2>
 <!-- Replace each placeholder with: <a href="../assets/driver-in-the-loop-simulator/photo.jpg" data-caption="Caption."><img src="../assets/driver-in-the-loop-simulator/photo.jpg" alt="Description" loading="lazy"></a>
      and copy the <dialog class="lightbox"> block from battery-pack.html below the gallery -->
@@ -121,9 +126,17 @@
   <script type="application/json" class="chart-data">{"t":[10.0,10.05,10.1,10.15,10.2,10.25,10.3,10.35,10.4,10.45,10.5,10.55,10.6,10.65,10.7,10.75,10.8,10.85,10.9,10.95,11.0,11.05,11.1,11.15,11.2,11.25,11.3,11.35,11.4,11.45,11.5,11.55,11.6,11.65,11.7,11.75,11.8,11.85,11.9,11.95,12.0,12.05,12.1,12.15,12.2,12.25,12.3,12.35,12.4,12.45,12.5,12.55,12.6,12.65,12.7,12.75,12.8,12.85,12.9,12.95,13.0,13.05,13.1,13.15,13.2,13.25,13.3,13.35,13.4,13.45,13.5,13.55,13.6,13.65,13.7,13.75,13.8,13.85,13.9,13.95,14.0],"sim":[-1.22,-1.24,-1.28,-1.3,-1.24,-1.22,-1.19,-1.18,-1.22,-1.25,-1.27,-1.07,-0.95,-0.71,-0.44,-0.15,0.27,0.89,0.94,1.05,1.15,1.21,1.22,1.24,1.25,1.3,1.33,1.33,1.34,1.36,1.39,1.41,1.4,1.39,1.39,1.38,1.4,1.38,1.42,1.35,1.33,1.3,1.3,1.31,1.28,1.25,1.23,1.22,1.19,1.17,1.13,1.14,1.15,1.17,1.17,1.17,1.2,1.22,1.23,1.23,1.23,1.25,1.27,1.28,1.27,1.25,1.24,1.26,1.28,1.31,1.27,1.29,1.33,1.28,1.27,1.26,1.26,1.27,1.27,1.26,1.24],"test":[-1.63,-1.6,-1.53,-1.49,-1.44,-1.4,-1.35,-1.28,-1.11,-0.93,-0.66,-0.41,-0.14,0.09,0.28,0.48,0.6,0.72,0.82,0.91,0.98,1.09,1.14,1.18,1.25,1.3,1.33,1.33,1.34,1.36,1.35,1.33,1.37,1.39,1.39,1.38,1.43,1.43,1.4,1.4,1.41,1.37,1.35,1.35,1.33,1.31,1.3,1.32,1.32,1.31,1.3,1.3,1.32,1.34,1.32,1.3,1.3,1.33,1.32,1.3,1.33,1.35,1.35,1.33,1.33,1.31,1.3,1.31,1.33,1.31,1.27,1.29,1.33,1.33,1.33,1.35,1.36,1.34,1.32,1.32,1.32],"xRange":[10,14],"yRange":[-2,2],"xUnit":"s","yUnit":"G","plot":{"left":56,"top":24,"width":420,"height":420,"viewWidth":520},"series":[{"key":"sim","label":"Sim"},{"key":"test","label":"Test"}]}</script>
 </figure>
 <h2>Results</h2>
-<p>[Measurable outcomes and what the project achieved.]</p>
+<h3>Suspension development</h3>
+<p>The DiL was crucial to developing the FB26's suspension geometry, because it let us evaluate handling qualitatively. Open-loop testing is useful, but it's hard to truly understand what a change does without feeling it from the driver's seat.</p>
+<h3>Control systems</h3>
+<p>We used it to develop the FB26 and FB27 control systems, including torque vectoring, traction control and regenerative braking, along with derating strategies. It lets us test new control concepts and fail fast before putting the time and effort into running them on the real car. For torque vectoring, it helped us land on a proportional controller that tracks a target yaw rate, with all of the tuning done in the DiL. That gave us a good baseline for physical testing instead of spending track time on tuning.</p>
+<h3>Battery pack development</h3>
+<p>For the FB28 battery pack, the DiL lets us compare cell types and layouts over a full endurance run with a real driver. Applying a single power profile to a battery model is possible, but it doesn't capture how a new pack changes the car's dynamics, so extended DiL testing of the most promising designs has been especially valuable.</p>
+<h3>Driver training</h3>
+<p>Over the past year, two drivers have logged more than 200 hours in the simulator. That's more seat time than some teams get from five years of track testing.</p>
+<p>The simulator was also handed off to Ford Performance, which used it as a basis for its own CarSim DiL efforts.</p>
 <h2>What I'd do differently</h2>
-<p>[One or two honest lessons.]</p>
+<p>Getting to a working simulator took about six months longer than it needed to, because I got carried away building a real-time multibody vehicle simulation in Simulink. It was interesting work, but I never had a requirement that justified it, and its much higher computational load made real-time performance very difficult. Switching to CarSim as the main physics engine is what got the simulator running. Next time, I'd tie each major technical choice to a requirement before committing months to it.</p>
   </article>
 
 </main>
