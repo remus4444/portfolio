@@ -25,29 +25,36 @@ document.querySelectorAll('.viewer').forEach((box) => {
 });
 
 // Line chart hover: crosshair, dots and tooltip at the nearest data point.
+// Each chart's .chart-data JSON holds its series, axis ranges and units, plus
+// the plot area used to draw the SVG (defaults: x 56-664, y 24-316 in 720 wide).
 document.querySelectorAll('.chart').forEach((chart) => {
   const data = JSON.parse(chart.closest('figure').querySelector('.chart-data').textContent);
   const svg = chart.querySelector('svg');
   const tip = chart.querySelector('.chart-tip');
   const cross = svg.querySelector('.cross');
-  const dots = { max: svg.querySelector('.dot.s1'), avg: svg.querySelector('.dot.s2') };
-  // Must match the plot area used to draw the SVG.
-  const x = (t) => 56 + 608 * t / 20;
-  const y = (v) => 316 - 292 * (v - 20) / 45;
-  const hide = () => { [cross, dots.max, dots.avg, tip].forEach((el) => { el.toggleAttribute('hidden', true); }); };
+  const [x0, x1] = data.xRange;
+  const [y0, y1] = data.yRange;
+  const { left, top, width, height, viewWidth } = { left: 56, top: 24, width: 608, height: 292, viewWidth: 720, ...data.plot };
+  const x = (t) => left + width * (t - x0) / (x1 - x0);
+  const y = (v) => top + height - height * (v - y0) / (y1 - y0);
+  const dots = data.series.map((s, k) => svg.querySelector(`.dot.s${k + 1}`));
+  const marks = [cross, ...dots, tip];
+  const show = (on) => { marks.forEach((el) => { el.toggleAttribute('hidden', !on); }); };
   svg.addEventListener('pointermove', (e) => {
     const p = new DOMPoint(e.clientX, e.clientY).matrixTransform(svg.getScreenCTM().inverse());
-    const i = Math.max(0, Math.min(data.t.length - 1, Math.round((p.x - 56) / 608 * 20 / 0.5)));
+    const t = x0 + (p.x - left) / width * (x1 - x0);
+    let i = 0;
+    data.t.forEach((v, k) => { if (Math.abs(v - t) < Math.abs(data.t[i] - t)) i = k; });
     const px = x(data.t[i]);
     cross.setAttribute('x1', px); cross.setAttribute('x2', px);
-    for (const k of ['max', 'avg']) { dots[k].setAttribute('cx', px); dots[k].setAttribute('cy', y(data[k][i])); }
-    tip.innerHTML = `<b>${data.t[i]} min</b>Max ${data.max[i]} °C<br>Avg ${data.avg[i]} °C`;
-    [cross, dots.max, dots.avg, tip].forEach((el) => { el.toggleAttribute('hidden', false); });
-    const scale = svg.getBoundingClientRect().width / 720;
+    data.series.forEach((s, k) => { dots[k].setAttribute('cx', px); dots[k].setAttribute('cy', y(data[s.key][i])); });
+    tip.innerHTML = `<b>${data.t[i]} ${data.xUnit}</b>` + data.series.map((s) => `${s.label} ${data[s.key][i]} ${data.yUnit}`).join('<br>');
+    show(true);
+    const scale = svg.getBoundingClientRect().width / viewWidth;
     const left = px * scale;
     tip.style.left = (left > svg.clientWidth / 2 ? left - tip.offsetWidth - 12 : left + 12) + 'px';
   });
-  svg.addEventListener('pointerleave', hide);
+  svg.addEventListener('pointerleave', () => show(false));
 });
 
 // Gallery: clicking a photo opens it larger with its caption.

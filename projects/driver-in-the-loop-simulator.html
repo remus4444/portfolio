@@ -7,13 +7,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Saira:wght@700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="../css/style.css">
-  <!-- When adding a 3D model, also add the model-viewer <script> line from battery-pack.html -->
 </head>
 <body>
 <header class="topbar">
   <div class="wrap">
-    <a class="brand" href="../index.html">Home</a>
     <nav>
+      <a href="../index.html">Home</a>
       <a href="../index.html#projects">Projects</a>
       <a href="../assets/resume.pdf">Résumé</a>
       <a href="../index.html#contact">Contact</a>
@@ -25,19 +24,22 @@
   <a class="back" href="../index.html#projects">&larr; All projects</a>
   <header class="project-head">
     <h1>Driver-in-the-Loop Simulator</h1>
-    <p class="lede">[One-sentence summary of what you did and why it mattered.]</p>
+    <p class="lede">Built a driver-in-the-loop simulator from scratch for student teams at Ohio State's Center for Automotive Research, giving Formula Buckeyes a way to train drivers and test vehicle changes year-round.</p>
   </header>
-  <div class="facts"><div><span>Role</span><strong>[Role]</strong></div><div><span>Timeline</span><strong>[Start–End]</strong></div><div><span>Tools</span><strong>[Tools]</strong></div></div>
+  <div class="facts"><div><span>Role</span><strong>Creator and lead developer</strong></div><div><span>Timeline</span><strong>Oct 2024–present</strong></div><div><span>Tools</span><strong>Simulink · CarSim · MoTeC i2 Pro</strong></div></div>
 
   <article class="content">
-    <h2>3D model</h2>
-    <!-- Replace with a viewer block from battery-pack.html once the model exists, or delete this section -->
-    <div class="viewer no-model"><div class="missing ph">assets/driver-in-the-loop-simulator/model.glb</div></div>
+<figure>
+  <div class="video"><iframe src="https://www.youtube-nocookie.com/embed/aQBZ72tVAHM" title="FB26 first run in the driver-in-the-loop simulator" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+  <figcaption>Driving the FB26 in the simulator during the car's development, summer 2026.</figcaption>
+</figure>
 <h2>Specs</h2>
 <table class="specs">
-  <tr><th>[Spec]</th><td>[Value]</td></tr>
-  <tr><th>[Spec]</th><td>[Value]</td></tr>
-  <tr><th>[Spec]</th><td>[Value]</td></tr>
+  <tr><th>Vehicle model</th><td>CarSim, with custom Simulink plant models and control logic</td></tr>
+  <tr><th>Simulation rate</th><td>1&nbsp;kHz</td></tr>
+  <tr><th>Architecture</th><td>Dedicated offline simulation PC, streaming data over UDP to a separate PC for post-processing</td></tr>
+  <tr><th>Steering</th><td>Custom steering wheel on a Simucube 2 Pro direct-drive base, up to 21&nbsp;Nm to match the car's steering torque</td></tr>
+  <tr><th>Pedals</th><td>Heusinkveld Pro pedals, matched to the car's maximum braking forces</td></tr>
 </table>
 <h2>The problem</h2>
 <p>[What state the project was in when you started, and what needed to change.]</p>
@@ -58,6 +60,66 @@
   <div class="ph">assets/driver-in-the-loop-simulator/photo-2.jpg</div>
   <div class="ph">assets/driver-in-the-loop-simulator/photo-3.jpg</div>
 </div>
+<h2>Correlation</h2>
+<p>There are several ways to correlate a simulator. We relied on two of them, driver feedback and open-loop comparisons with the real car.</p>
+<p>For driver feedback, we invited drivers of the team's current and past cars to drive the simulator and asked how closely it matched the real thing. Most were impressed by how similar it felt. Some found it harder to judge, because a static rig can't reproduce the lateral g-forces they feel on their head and neck on track.</p>
+<p>For the open-loop comparisons, we fed the inputs recorded on the real car into the vehicle model and compared the results. One of these was skidpad, a figure-eight maneuver that tests both the steady-state and transient behavior of the model against the real car. The plot below compares lateral acceleration through the direction change.</p>
+<figure class="square">
+  <div class="chart">
+    <p class="chart-legend"><span class="key s1"></span>DiL simulation (CarSim) <span class="key s2"></span>Track test (MoTeC)</p>
+    <div class="chart-plot">
+      <svg viewBox="0 0 520 488" role="img" aria-label="Lateral acceleration from 10 to 14 seconds of a skidpad run, simulation versus track test. Both traces swing from about minus 1.3 G to plus 1.4 G between 10.5 and 11.5 seconds, then settle near 1.25 G for the simulation and 1.3 G for the track test.">
+<line class="grid" x1="56" x2="476" y1="444.0" y2="444.0"/><text class="tick" x="48" y="448.0" text-anchor="end">-2</text>
+<line class="grid" x1="56" x2="476" y1="339.0" y2="339.0"/><text class="tick" x="48" y="343.0" text-anchor="end">-1</text>
+<line class="grid" x1="56" x2="476" y1="234.0" y2="234.0"/><text class="tick" x="48" y="238.0" text-anchor="end">0</text>
+<line class="grid" x1="56" x2="476" y1="129.0" y2="129.0"/><text class="tick" x="48" y="133.0" text-anchor="end">1</text>
+<line class="grid" x1="56" x2="476" y1="24.0" y2="24.0"/><text class="tick" x="48" y="28.0" text-anchor="end">2</text>
+<text class="tick x" x="56.0" y="464" text-anchor="middle">10</text>
+<text class="tick x" x="108.5" y="464" text-anchor="middle">10.5</text>
+<text class="tick x" x="161.0" y="464" text-anchor="middle">11</text>
+<text class="tick x" x="213.5" y="464" text-anchor="middle">11.5</text>
+<text class="tick x" x="266.0" y="464" text-anchor="middle">12</text>
+<text class="tick x" x="318.5" y="464" text-anchor="middle">12.5</text>
+<text class="tick x" x="371.0" y="464" text-anchor="middle">13</text>
+<text class="tick x" x="423.5" y="464" text-anchor="middle">13.5</text>
+<text class="tick x" x="476.0" y="464" text-anchor="middle">14</text>
+<text class="note" x="56" y="14">Lateral acceleration (G)</text>
+<text class="note" x="476" y="484" text-anchor="end">Time (s)</text>
+<polyline class="s2" points="56.3,405.1 58.4,403.6 60.6,402.6 62.7,401.1 64.8,397.3 67.0,394.4 69.1,391.9 71.2,390.3 73.4,388.8 75.5,386.9 77.6,385.0 79.8,382.5 81.9,381.5 84.0,380.6 86.2,378.4 88.3,374.6 90.4,371.4 92.6,369.2 94.7,361.4 96.8,354.4 99.1,347.8 101.1,340.4 103.2,331.5 105.5,320.2 107.6,307.6 109.7,297.8 111.9,288.7 114.0,276.1 116.1,264.2 118.3,252.0 120.4,243.8 122.5,233.7 124.7,222.0 126.8,214.2 128.9,206.6 131.1,198.7 133.2,189.4 135.3,182.1 137.5,176.8 139.6,171.4 141.7,167.3 143.9,162.6 146.0,156.0 148.1,152.8 150.3,148.4 152.4,147.2 154.5,143.1 156.7,135.8 158.8,133.0 160.9,130.8 163.1,127.3 165.2,122.0 167.3,117.7 169.5,115.8 171.6,114.5 173.7,112.9 175.9,110.7 178.0,108.2 180.1,106.0 182.3,102.5 184.4,100.6 186.5,98.1 188.7,95.3 190.8,94.3 192.9,93.7 195.1,94.3 197.2,94.7 199.3,94.3 201.5,94.3 203.6,92.8 205.7,91.5 207.9,90.9 210.0,91.2 212.1,91.2 214.3,92.1 216.4,93.4 218.6,94.0 220.7,94.0 222.8,91.2 225.0,89.9 227.2,88.4 229.3,87.7 231.5,87.1 233.6,87.7 235.7,88.4 237.9,89.0 240.0,89.3 242.1,87.4 244.3,84.6 246.4,84.0 248.5,83.6 250.7,84.0 252.8,85.2 254.9,86.5 257.1,87.7 259.2,87.1 261.3,86.8 263.5,85.8 265.6,85.5 267.7,89.0 269.9,89.9 272.0,90.6 274.1,91.2 276.3,92.1 278.4,92.8 280.5,92.5 282.7,92.1 284.8,92.1 286.9,94.3 289.1,95.0 291.2,96.2 293.3,96.6 295.5,97.5 297.6,97.5 299.7,96.9 301.9,95.6 304.0,94.0 306.1,94.3 308.3,95.0 310.4,95.9 312.5,96.6 314.7,97.2 316.8,97.5 318.9,97.5 321.1,97.5 323.2,97.5 325.3,97.5 327.5,96.6 329.6,95.0 331.7,93.4 333.9,92.8 336.0,93.1 338.1,94.0 340.3,95.6 342.4,96.6 344.5,97.8 346.7,98.1 348.8,98.4 350.9,96.9 353.2,95.6 355.2,94.7 357.3,94.3 359.6,95.3 361.7,95.6 363.8,96.9 366.0,97.2 368.1,96.2 370.2,95.0 372.4,94.3 374.5,92.8 376.6,91.8 378.8,91.5 380.9,91.8 383.1,92.8 385.2,93.7 387.3,94.0 389.5,94.0 391.6,94.0 393.7,94.7 395.9,95.6 398.0,96.2 400.1,97.2 402.3,97.5 404.4,97.5 406.5,96.9 408.7,95.9 410.8,94.3 412.9,94.3 415.1,94.7 417.2,95.6 419.3,98.1 421.5,100.3 423.6,100.3 425.7,100.0 427.9,99.4 430.0,98.4 432.1,96.9 434.3,94.3 436.4,94.3 438.5,94.7 440.7,94.7 442.8,94.7 444.9,94.0 447.1,92.5 449.2,91.8 451.3,91.5 453.5,91.5 455.6,91.2 457.7,91.8 459.9,93.1 462.0,94.0 464.1,94.7 466.3,95.3 468.4,95.9 470.5,95.6 472.7,95.3 474.8,95.3 476.9,95.6"/>
+<polyline class="s1" points="56.3,361.7 58.4,362.9 60.6,363.9 62.7,364.5 64.8,366.4 67.0,368.6 69.1,371.1 71.2,370.8 73.4,370.2 75.5,365.5 77.6,363.3 79.8,362.6 81.9,362.0 84.0,360.4 86.2,358.8 88.3,358.2 90.4,356.3 92.6,357.9 94.7,359.4 96.8,360.9 99.1,362.4 101.1,364.0 103.2,365.5 105.5,364.8 107.6,367.4 109.7,367.4 111.9,361.4 114.0,345.1 116.1,336.6 118.3,335.6 120.4,331.2 122.5,321.8 124.7,305.1 126.8,295.9 128.9,283.4 131.1,272.6 133.2,264.2 135.3,244.1 137.5,228.3 139.6,210.1 141.7,189.4 143.9,141.8 146.0,139.6 148.1,138.0 150.3,135.5 152.4,131.1 154.5,126.6 156.7,122.0 158.8,117.3 160.9,113.6 163.1,109.2 165.2,107.6 167.3,106.6 169.5,106.3 171.6,105.7 173.7,103.8 175.9,101.0 178.0,108.2 180.1,106.0 182.3,102.5 184.4,100.6 186.5,98.1 188.7,95.3 190.8,94.3 192.9,93.7 195.1,94.3 197.2,94.7 199.3,94.3 201.5,94.3 203.6,92.8 205.7,91.5 207.9,90.9 210.0,91.2 212.1,91.2 214.3,85.5 216.4,85.8 218.6,86.5 220.7,84.9 222.8,83.3 225.0,89.9 227.2,88.4 229.3,87.7 231.5,87.1 233.6,87.7 235.7,88.4 237.9,89.0 240.0,89.3 242.1,87.4 244.3,84.6 246.4,91.8 248.5,90.9 250.7,88.9 252.8,86.9 254.9,85.0 257.1,83.0 259.2,88.1 261.3,93.1 263.5,93.4 265.6,93.7 267.7,96.9 269.9,97.5 272.0,97.5 274.1,98.1 276.3,97.8 278.4,97.5 280.5,96.9 282.7,96.2 284.8,97.7 286.9,99.3 289.1,100.8 291.2,102.2 293.3,103.8 295.5,105.1 297.6,105.4 299.7,105.4 301.9,106.0 304.0,106.9 306.1,108.2 308.3,109.2 310.4,109.5 312.5,110.7 314.7,112.6 316.8,114.5 318.9,115.1 321.1,115.8 323.2,114.8 325.3,114.2 327.5,113.2 329.6,112.9 331.7,112.0 333.9,111.4 336.0,111.7 338.1,111.7 340.3,111.4 342.4,111.0 344.5,111.0 346.7,110.1 348.8,108.2 350.9,107.6 353.2,106.9 355.2,106.3 357.3,105.1 359.6,105.1 361.7,104.7 363.8,104.4 366.0,104.4 368.1,104.7 370.2,105.1 372.4,104.7 374.5,103.5 376.6,102.9 378.8,102.2 380.9,101.0 383.1,100.3 385.2,100.0 387.3,100.0 389.5,100.0 391.6,101.0 393.7,101.9 395.9,102.5 398.0,103.2 400.1,103.5 402.3,103.5 404.4,103.2 406.5,102.3 408.7,101.4 410.8,100.5 412.9,99.7 415.1,94.7 417.2,95.6 419.3,98.1 421.5,100.3 423.6,100.3 425.7,100.0 427.9,99.4 430.0,98.4 432.1,96.9 434.3,94.3 436.4,99.1 438.5,99.4 440.7,99.4 442.8,99.7 444.9,100.6 447.1,101.0 449.2,101.6 451.3,102.5 453.5,102.5 455.6,101.9 457.7,101.6 459.9,101.0 462.0,100.6 464.1,101.0 466.3,101.0 468.4,101.0 470.5,101.6 472.7,102.2 474.8,103.2 476.9,103.8"/>
+<text class="label" x="482" y="91.4">Test</text><text class="label" x="482" y="117.8">Sim</text>
+<line class="cross" x1="0" x2="0" y1="24" y2="444" hidden/>
+<circle class="dot s1" r="5" hidden/><circle class="dot s2" r="5" hidden/>
+      </svg>
+      <div class="chart-tip" hidden></div>
+    </div>
+    <details>
+      <summary>Show data table</summary>
+      <p>Values traced from the original MATLAB plot.</p>
+      <table class="data">
+        <tr><th>Time (s)</th><th>DiL simulation (G)</th><th>Track test (G)</th></tr>
+          <tr><td>10.00</td><td>-1.22</td><td>-1.63</td></tr>
+          <tr><td>10.25</td><td>-1.22</td><td>-1.40</td></tr>
+          <tr><td>10.50</td><td>-1.27</td><td>-0.66</td></tr>
+          <tr><td>10.75</td><td>-0.15</td><td>0.48</td></tr>
+          <tr><td>11.00</td><td>1.15</td><td>0.98</td></tr>
+          <tr><td>11.25</td><td>1.30</td><td>1.30</td></tr>
+          <tr><td>11.50</td><td>1.39</td><td>1.35</td></tr>
+          <tr><td>11.75</td><td>1.38</td><td>1.38</td></tr>
+          <tr><td>12.00</td><td>1.33</td><td>1.41</td></tr>
+          <tr><td>12.25</td><td>1.25</td><td>1.31</td></tr>
+          <tr><td>12.50</td><td>1.13</td><td>1.30</td></tr>
+          <tr><td>12.75</td><td>1.17</td><td>1.30</td></tr>
+          <tr><td>13.00</td><td>1.23</td><td>1.33</td></tr>
+          <tr><td>13.25</td><td>1.25</td><td>1.31</td></tr>
+          <tr><td>13.50</td><td>1.27</td><td>1.27</td></tr>
+          <tr><td>13.75</td><td>1.26</td><td>1.35</td></tr>
+          <tr><td>14.00</td><td>1.24</td><td>1.32</td></tr>
+      </table>
+    </details>
+  </div>
+  <script type="application/json" class="chart-data">{"t":[10.0,10.05,10.1,10.15,10.2,10.25,10.3,10.35,10.4,10.45,10.5,10.55,10.6,10.65,10.7,10.75,10.8,10.85,10.9,10.95,11.0,11.05,11.1,11.15,11.2,11.25,11.3,11.35,11.4,11.45,11.5,11.55,11.6,11.65,11.7,11.75,11.8,11.85,11.9,11.95,12.0,12.05,12.1,12.15,12.2,12.25,12.3,12.35,12.4,12.45,12.5,12.55,12.6,12.65,12.7,12.75,12.8,12.85,12.9,12.95,13.0,13.05,13.1,13.15,13.2,13.25,13.3,13.35,13.4,13.45,13.5,13.55,13.6,13.65,13.7,13.75,13.8,13.85,13.9,13.95,14.0],"sim":[-1.22,-1.24,-1.28,-1.3,-1.24,-1.22,-1.19,-1.18,-1.22,-1.25,-1.27,-1.07,-0.95,-0.71,-0.44,-0.15,0.27,0.89,0.94,1.05,1.15,1.21,1.22,1.24,1.25,1.3,1.33,1.33,1.34,1.36,1.39,1.41,1.4,1.39,1.39,1.38,1.4,1.38,1.42,1.35,1.33,1.3,1.3,1.31,1.28,1.25,1.23,1.22,1.19,1.17,1.13,1.14,1.15,1.17,1.17,1.17,1.2,1.22,1.23,1.23,1.23,1.25,1.27,1.28,1.27,1.25,1.24,1.26,1.28,1.31,1.27,1.29,1.33,1.28,1.27,1.26,1.26,1.27,1.27,1.26,1.24],"test":[-1.63,-1.6,-1.53,-1.49,-1.44,-1.4,-1.35,-1.28,-1.11,-0.93,-0.66,-0.41,-0.14,0.09,0.28,0.48,0.6,0.72,0.82,0.91,0.98,1.09,1.14,1.18,1.25,1.3,1.33,1.33,1.34,1.36,1.35,1.33,1.37,1.39,1.39,1.38,1.43,1.43,1.4,1.4,1.41,1.37,1.35,1.35,1.33,1.31,1.3,1.32,1.32,1.31,1.3,1.3,1.32,1.34,1.32,1.3,1.3,1.33,1.32,1.3,1.33,1.35,1.35,1.33,1.33,1.31,1.3,1.31,1.33,1.31,1.27,1.29,1.33,1.33,1.33,1.35,1.36,1.34,1.32,1.32,1.32],"xRange":[10,14],"yRange":[-2,2],"xUnit":"s","yUnit":"G","plot":{"left":56,"top":24,"width":420,"height":420,"viewWidth":520},"series":[{"key":"sim","label":"Sim"},{"key":"test","label":"Test"}]}</script>
+</figure>
 <h2>Results</h2>
 <p>[Measurable outcomes and what the project achieved.]</p>
 <h2>What I'd do differently</h2>

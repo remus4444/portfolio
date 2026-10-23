@@ -1,19 +1,20 @@
 # Portfolio site: handoff notes
 
-Personal engineering portfolio for **Mehmet Kara** (goes by Remus), a mechanical engineering student at The Ohio State University and Vehicle Dynamics Director for Formula Buckeyes, OSU's FSAE electric team. Audience: recruiters for design engineering roles in automotive and aerospace, plus friends.
+Personal engineering portfolio for **Mehmet Kara** (goes by Remus), a mechanical engineering student at The Ohio State University and Vehicle Dynamics Director for Formula Buckeyes, OSU's FSAE electric team. Audience: recruiters for design engineering roles (kept open-ended, not tied to an industry), plus friends.
 
 Live at **https://remus4444.github.io/portfolio** (GitHub Pages, deploys from `main` / root on every push).
 
 ## Current scope
 
-Four projects, in this order on the home page:
+Five projects, in this order on the home page:
 
 1. **FB26 600 V Battery Pack** (the accumulator redesign) (`projects/battery-pack.html`): the most complete page.
-2. **Driver-in-the-Loop Simulator** (`projects/driver-in-the-loop-simulator.html`). Known so far: one of the first FSAE driver-in-the-loop simulators in the USA; a high-fidelity, real-time vehicle simulation used for driver training and system development, year-round and at low cost.
+2. **Driver-in-the-Loop Simulator** (`projects/driver-in-the-loop-simulator.html`). Known so far: one of the first FSAE driver-in-the-loop simulators in the USA; a high-fidelity, real-time vehicle simulation used for driver training and system development, year-round and at low cost. Built by Remus at OSU's Center for Automotive Research (CAR) for CAR's student project teams; primarily used by Formula Buckeyes. It served as the basis for Ford Motorsports' own CarSim DiL program, used in development of Ford's LMDh hypercar (confirm with Remus that this is OK to state publicly before publishing). Started Oct 2024 (before his CAR research assistant role, May–Aug 2025) and still ongoing: core functionality is done; fidelity and quality-of-life features are still being added. Software: Simulink and CarSim. Hardware includes a custom steering wheel and peripherals. Architecture: an offline physics PC (never connected to the internet, stripped to only what the sim needs) runs the simulation and streams data over UDP through a network card to an internet-connected data PC running analysis software such as MoTeC i2 Pro. DiL log files are converted automatically to MoTeC i2 format, the same as the real car's. Rig: Simucube 2 Pro direct-drive wheel base (up to 21 Nm, matching the car's steering torque), Heusinkveld Pro pedals (matched to the car's maximum braking forces), custom steering wheel, static (no motion). 1 kHz simulation rate. Remus chose not to list the 98% correlation, display setup or data output in the specs table. The page's Correlation section has a lateral acceleration chart (skidpad direction change, 10-14 s, DiL CarSim output vs MoTeC track data from TRC). Its values were traced pixel-by-pixel from Remus's MATLAB plot screenshot, not exported raw data; a note inside "Show data table" says so (Remus removed the caption). Replace with the raw logs if he provides them.
 3. **FSAE Battery Testing and Simulation** (`projects/battery-testing-model.html`). Known so far: the team's first battery testing and simulation program; industry-grade equipment and test procedures; predictive cell models in Simulink; guides cell selection and pack design for future years.
 4. **FB26 Suspension Design** (`projects/fb26-suspension.html`). Page written 2026-10-21 from Remus's notes, except the gallery (photos to come). Facts: design Jul–Aug 2025; SolidWorks + Excel design table, Lotus Shark kinematics, CarSim handling, ANSYS Static Structural for the anti-roll bar; double wishbone pushrod, 1530 mm wheelbase, 1200 mm track front and rear; constraints were the front chassis half (front inboard hardpoints fixed), wheels and all four uprights. Wheels are three-piece: in-house carbon fiber rims with aluminum centers. FB25's suspension was adapted from FB24 (carbon monocoque front, tube frame rear): top-plane rear damper mounts, anti-roll bar inside the chassis, wheelbase shortened 1585 to 1530 mm without simulation. Fix: single-shear pivot posts on a chassis-side chamfer (more rigid, front parts reused at the rear) and the anti-roll bar moved to the rear of the chassis (35% rear roll stiffness target, within 0.5%, lighter). Results: earliest suspension handoff in team history (before fall semester), 75% faster iteration, neutral, predictable handling. Lesson: involve newer members instead of designing alone.
+5. **Tesla Semi Manufacturing Internship** (`projects/tesla-semi.html`), added 2026-10-20 at Remus's request. Facts so far come only from his published résumé: Semi Manufacturing Engineering Intern, Sparks, NV, May–Aug 2026; reverse engineered proprietary tools in CATIA V5 from laser scan and CMM data (saved thousands in contracting costs); built a scaled-down 6-axis Fanuc robot cell to train technicians; cut fifth wheel mounting station cycle time 15% with a custom pneumatic quick connector (gasket sealing optimized via design tables and SLA printing, $5 in-house unit cost). On the page, the fifth wheel bullet was generalized at Remus's request to "improved station cycle times" with in-house tooling made on Formlabs printers (no 15% or $5). Page style follows https://thanhvtran.com/portfolio/apple-internship/: NDA notice at the top ("public knowledge or approved for disclosure by my manager"), short general description, bullet list of work, skills chips, public images only, no lessons section. Keep it brief and non-specific.
 
-Projects 2–3 are empty shells (added 2026-10-20) that use the battery pack page's section layout, with every section a `[bracketed placeholder]`. Remus hasn't given any facts about them yet, so don't fill them in until he does. Don't add or suggest further projects unless he asks.
+Project 2 (DiL) is being written up section by section with Remus (facts row, subtitle, specs, video and Correlation done as of 2026-10-23; The problem is next). Project 3 is still an empty shell using the battery pack page's section layout, with every section a `[bracketed placeholder]`; don't fill it in until Remus gives facts. Don't add or suggest further projects unless he asks.
 
 ## Known facts about the accumulator project
 
@@ -25,7 +26,7 @@ Use only these unless Remus provides more. Never invent numbers, specs, or outco
 - He considers it his most impressive accomplishment.
 - Tools used: SolidWorks, Simulink, Altium. (Notion was used for task tracking but isn't listed as a tool.)
 - Timeline: Aug 2026 to Nov 2026.
-- Pack specs: 576 V (6 × 96 V subsegments), 9.1 kWh, 138s5p, Sony VTC6 (18650) cells, 69 kg, passive cooling. Project titles (page title, h1, home card heading) say "600 V" because it's more eye-catching and close to correct; everywhere else (specs, body text, card summary) says 576 V.
+- Pack specs: 576 V (6 × 96 V subsegments), 9.1 kWh, 138s5p, Sony VTC6 (18650) cells, 69 kg, passive cooling. Project titles (page title, h1), the project page subtitle and the home card (heading and summary) say "600 V" because it's more eye-catching, close to correct and avoids confusing visitors; the specs table (and model alt text) say 576 V.
 - It is the team's first functioning pack, and that is the main accomplishment. Its metrics are modest because the cells and module layout were inherited and out of scope. Frame results that way, not as impressive numbers.
 - The electronics box consolidated the electronics in the top-box into one main housing, shrinking the PCB footprint by a factor of three. The freed top-box space went to larger, rules-compliant maintenance plugs (no before/after footprint numbers; Remus chose not to add them). It holds five boards: precharge discharge board, precharge discharge daughter board (relays that switch the contactors), high voltage detection board (alerts other subsystems, e.g. the safety board), high voltage indicator board (LED visible on the lid) and insulation measurement device (shuts the pack down on an insulation fault). Much of the e-box effort was coordinating with the electronics subteam on connector vertical clearance (install and wire bend) and efficient wire routing. Remus wrote a 20-page build guide so any member could assemble it.
 - Lessons: keep design reviews on the schedule (an extra hour per subassembly would have avoided an unnecessary revision); prototype test-fit parts in PLA before printing in PC-FR (expensive, scarce).
@@ -42,7 +43,7 @@ index.html                 Home: top bar, hero, project cards, Contact
 projects/*.html            One page per project (see Current scope); the three newer ones are placeholder shells
 projects/battery-pack.html Project page: facts row, then 3D model, Specs, The problem, What I did, Subsystem showcases (Electronics box), Gallery, Results, What I'd do differently
 css/style.css              All styles and design tokens
-js/main.js                 3D viewer fallback, gallery lightbox, chart hover, footer year
+js/main.js                 3D viewer fallback, gallery lightbox, chart hover (axes, units and series come from each chart's .chart-data JSON), footer year
 assets/<project>/          Images (cover.jpg, etc.) and .glb models, one folder per project
 README.md                  Deploy and editing instructions for Remus
 ```
@@ -52,8 +53,8 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 ## Design rules
 
 - Dark-only theme (near-black background, gray body text). Originally modeled on https://www.vkhouri.dev, but the home page was redesigned on 2026-10-20 because it looked like a copy of that site. Don't drift back toward it: no round avatar plus name block, no icon-tile contact, no underlined card titles or "Read more" buttons.
-- Every page has a slim top bar: "Home" (display font) on the left, Projects / Résumé / Contact links on the right. Don't put his name in the bar; the hero already shows it.
-- Home: hero with a very large display-font name, the intro, Download résumé and Email me buttons, and a facts row (Studying, Based in only). No eyebrow line above the name. Then project cards in a two-column grid: bordered panels (16:10 photo, title, summary, underlined "View project →") that lift on hover so they read as clickable. No numbers or category tags. Then Contact as labelled rows (Email, LinkedIn, GitHub, Résumé). No form, because GitHub Pages can't process one without a third-party service.
+- Every page has a slim top bar with Home / Projects / Résumé / Contact links, all right-aligned and styled alike. Don't put his name in the bar; the hero already shows it.
+- Home: hero with a very large display-font name, the intro, a Download résumé button (no Email me button; email lives in Contact), and a facts row (Studying, Based in only). No eyebrow line above the name. Then project cards in a two-column grid: bordered panels (16:10 photo, title, summary, underlined "View project →") that lift on hover so they read as clickable. No numbers or category tags. Then Contact as labelled rows (Email, LinkedIn, GitHub, Résumé). No form, because GitHub Pages can't process one without a third-party service.
 - Fonts: Inter (body), Saira 700 (display titles; free stand-in for the reference's Industry), JetBrains Mono (captions, placeholders), from Google Fonts.
 - Accent: Ohio State scarlet, lightened to `#ff5a5a` for the dark background. Use sparingly.
 - All colors are tokens on `:root` in `style.css`. Add new colors as tokens, never hard-coded.
@@ -82,12 +83,13 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 
 - Remus gives rough notes; turn them into polished, confident first-person prose and show him the result.
 - Keep it neutral and non-blaming, especially about the pack's history (credit the earlier electrical work; state problems as facts).
+- Avoid constructions that read as AI-generated, such as a colon introducing an explanation ("X: a Y that…"); prefer two plain sentences.
 - Plain and understated. He found the old hero tagline ("I design and build electric race car systems") cringeworthy; avoid slogans and hype.
 - Keep his team's terms (e.g. "main containment case", "subsegments"), and don't expand them into generic jargon.
 
 ## Résumé
 
-`assets/resume.pdf` is Remus's résumé (added 2026-10-20, includes his phone number; he approved publishing it). Replace the file when he sends a new version. Its bullets are a source of facts he has stated, e.g. suspension iteration time cut 75% via a parametric CAD + kinematic solver pipeline; battery models validated to under 3% average residual; DiL simulator built at OSU's Center for Automotive Research with 98% correlation in lateral acceleration and yaw rate. Don't use the Tesla internship content on the site (see Don'ts).
+`assets/resume.pdf` is Remus's résumé (added 2026-10-20, includes his phone number; he approved publishing it). Replace the file when he sends a new version. Its bullets are a source of facts he has stated, e.g. suspension iteration time cut 75% via a parametric CAD + kinematic solver pipeline; battery models validated to under 3% average residual; DiL simulator built at OSU's Center for Automotive Research with 98% correlation in lateral acceleration and yaw rate. The Tesla internship now has its own page (see Current scope); keep it to résumé-level detail unless Remus confirms more is cleared.
 
 ## Placeholders still to fill
 
@@ -97,11 +99,11 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 
 Not yet resolved (as of 2026-10-20):
 
-1. **Replace placeholder test data.** The internal resistance and thermal numbers are fake. The thermal chart is a static SVG built from a 41-point series; the same data is in the `.chart-data` JSON (for hover) and the data table. Update all three, and `main.js` if the axis ranges change.
+1. **Replace placeholder test data.** The internal resistance and thermal numbers are fake. The thermal chart is a static SVG built from a 41-point series; the same data is in the `.chart-data` JSON (for hover) and the data table. Update all three, including the `xRange`/`yRange` in the JSON if the axis ranges change.
 2. **Model weight.** Accumulator (~40 MB, ~12M triangles, 23 translucent parts) and electronics box (~8 MB, ~2.7M triangles) are too heavy for phones. Remus chose to skip this for now. Also check the accumulator for flickering translucent parts.
 
 ## Don'ts
 
-- Don't publish internship work or anything under NDA.
-- Don't add analytics, trackers, or third-party scripts beyond Google Fonts and model-viewer without asking.
+- Don't publish anything under NDA. The Tesla page is allowed, but only with information Remus confirms is public or cleared by Tesla: no internal numbers, drawings, CAD or photos without approval. When he adds Tesla detail, remind him to check.
+- Don't add analytics, trackers, or third-party scripts beyond Google Fonts and model-viewer without asking. YouTube embeds are allowed when Remus asks for a video; use `youtube-nocookie.com` and the `.video` wrapper (the Tesla page has two: the Core Memory factory tour from the start and Formlabs' Fuse X1 video; the DiL page has Remus's own "fb26firstrun" video above Specs).
 - Don't fabricate content, metrics, testimonials, or skills he hasn't stated.
