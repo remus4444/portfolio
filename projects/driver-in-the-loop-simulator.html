@@ -58,13 +58,17 @@
 <p>Running Simulink alongside CarSim lets us send signals outside the CarSim environment and add our own plant models. The Simulink model handles all communication with the steering wheel and pedals, and sends live data to SimHub, which runs the driver display. It also runs our custom battery and motor models, so we can simulate the whole powertrain and get realistic motor torque, voltage and temperatures over a lap.</p>
 <p>Because our vehicle control unit (VCU) software is also built in Simulink, the DiL runs the same control systems as the real car. We develop new control strategies in the simulator with real driver feedback before deploying them to the VCU for track testing. That has been crucial for trying different control methods and for catching bugs before they reach the car.</p>
 <h2>Gallery</h2>
-<!-- Replace each placeholder with: <a href="../assets/driver-in-the-loop-simulator/photo.jpg" data-caption="Caption."><img src="../assets/driver-in-the-loop-simulator/photo.jpg" alt="Description" loading="lazy"></a>
-     and copy the <dialog class="lightbox"> block from battery-pack.html below the gallery -->
 <div class="gallery">
-  <div class="ph">assets/driver-in-the-loop-simulator/photo-1.jpg</div>
-  <div class="ph">assets/driver-in-the-loop-simulator/photo-2.jpg</div>
-  <div class="ph">assets/driver-in-the-loop-simulator/photo-3.jpg</div>
+  <a href="../assets/driver-in-the-loop-simulator/rig-overhead.jpg" data-caption="The simulator from above, driving around the 2025 FSAE Michigan track."><img src="../assets/driver-in-the-loop-simulator/rig-overhead.jpg" alt="Overhead view of a driver at the simulator's custom steering wheel, facing three curved screens that show the coned FSAE Michigan track and the car's nose" loading="lazy"></a>
+  <a href="../assets/driver-in-the-loop-simulator/rig-side.jpg" data-caption="The rig from the side, with the Simucube 2 Pro wheel base mounted on the aluminum extrusion frame."><img src="../assets/driver-in-the-loop-simulator/rig-side.jpg" alt="Side view of a driver seated in the simulator rig, hands on the wheel, with the direct-drive wheel base and three screens in front" loading="lazy"></a>
 </div>
+<dialog class="lightbox">
+  <figure>
+    <img src="" alt="">
+    <figcaption></figcaption>
+  </figure>
+  <button class="close" type="button" aria-label="Close">&times;</button>
+</dialog>
 <h2>Correlation</h2>
 <p>There are several ways to correlate a simulator. We relied on two of them, driver feedback and open-loop comparisons with the real car.</p>
 <p>For driver feedback, we invited drivers of the team's current and past cars to drive the simulator and asked how closely it matched the real thing. Most were impressed by how similar it felt. Some found it harder to judge, because a static rig can't reproduce the lateral g-forces they feel on their head and neck on track.</p>
