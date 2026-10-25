@@ -25,43 +25,97 @@
   <a class="back" href="../index.html#projects">&larr; All projects</a>
   <header class="project-head">
     <h1>FSAE Battery Testing and Simulation</h1>
-    <p class="lede">[One-sentence summary of what you did and why it mattered.]</p>
+    <p class="lede">Started Formula Buckeyes' first battery testing and simulation program, building cell and pack models from lab data so the team can predict how a pack will perform before it's built.</p>
   </header>
-  <div class="facts"><div><span>Role</span><strong>[Role]</strong></div><div><span>Timeline</span><strong>[Start–End]</strong></div><div><span>Tools</span><strong>[Tools]</strong></div></div>
+  <div class="facts"><div><span>Role</span><strong>Program founder</strong></div><div><span>Timeline</span><strong>Jul 2025–present</strong></div><div><span>Tools</span><strong>MATLAB · Simulink</strong></div></div>
 
   <article class="content">
-    <h2>3D model</h2>
-    <!-- Replace with a viewer block from battery-pack.html once the model exists, or delete this section -->
-    <div class="viewer no-model"><div class="missing ph">assets/battery-testing-model/model.glb</div></div>
 <h2>Specs</h2>
 <table class="specs">
-  <tr><th>[Spec]</th><td>[Value]</td></tr>
-  <tr><th>[Spec]</th><td>[Value]</td></tr>
-  <tr><th>[Spec]</th><td>[Value]</td></tr>
+  <tr><th>Cell testing</th><td>300+ hours</td></tr>
+  <tr><th>Cell and module types tested</th><td>9</td></tr>
+  <tr><th>Formats</th><td>18650 and 21700, tabbed and tabless</td></tr>
+  <tr><th>Test levels</th><td>Cell, module, segment and full pack</td></tr>
+  <tr><th>Tests</th><td>HPPC, capacity, current profiles</td></tr>
+  <tr><th>Equipment</th><td>Arbin battery testers, thermocouples, thermal cameras</td></tr>
+  <tr><th>Model accuracy</th><td>Under 3% average residual (voltage and temperature)</td></tr>
 </table>
 <h2>The problem</h2>
-<p>[What state the project was in when you started, and what needed to change.]</p>
+<p>Before this program, the team chose cells from datasheets and hand calculations. We never tested candidate cells ourselves, and we had no cell models to show how a given cell would affect the car's performance.</p>
+<p>We also had no way to work out cooling requirements. That gap showed in the FB26 pack, which paired high-resistance cells with passive cooling. To keep the cells below a safe temperature, the car needed a large powertrain derate.</p>
 <h2>What I did</h2>
-<p>[Your approach, key constraints and design decisions.]</p>
-<ul>
-<li>[Contribution]</li>
-<li>[Contribution]</li>
-</ul>
-<h2>Subsystem showcases</h2>
-<h3>[Subsystem]</h3>
-<p>[What it is, what you designed, and why.]</p>
+<p>I came up with the idea for the program and did all of the work for its first five months. I wrote the standard test procedures and built the models and the MATLAB scripts that process the data. I then trained other leads and members to use them.</p>
+<h3>Testing</h3>
+<p>I ran hybrid pulse power characterization (HPPC) tests on the 1s5p Enepaq VTC6 modules used in the FB26 pack, and on candidate cells for future packs. We used the university's lab equipment, including Arbin battery testers, with thermocouples and thermal cameras to measure how temperature was distributed across the cells.</p>
+<p>Alongside HPPC, we ran capacity tests and current profile tests. A current profile test replays the current draw of a vehicle event, such as the endurance race, so we can see its effect on battery voltage and temperature and check how well the model matches.</p>
+<h3>Modeling</h3>
+<p>I post-processed the raw test data in MATLAB and used it to build cell models in Simulink. The cell models scale up to the full pack, so the team can simulate how a pack will perform before it's built.</p>
+<h2>Validation</h2>
+<p>To check the models, I ran the same tests on real cells and in simulation and compared the results. The plot below compares measured and simulated cell temperature over a full discharge, from 100% to 0% state of charge.</p>
+<figure>
+  <div class="chart">
+    <p class="chart-legend"><span class="key s1"></span>Simulation (Simulink) <span class="key s2"></span>Test</p>
+    <div class="chart-plot">
+      <svg viewBox="0 0 720 360" role="img" aria-label="Cell temperature versus state of charge over a full discharge, simulation versus test. Both start at 23 °C at full charge and rise to about 57 °C at empty, staying within 2 °C of each other throughout.">
+<line class="grid" x1="56" x2="664" y1="316.0" y2="316.0"/><text class="tick" x="48" y="320.0" text-anchor="end">20</text>
+<line class="grid" x1="56" x2="664" y1="243.0" y2="243.0"/><text class="tick" x="48" y="247.0" text-anchor="end">30</text>
+<line class="grid" x1="56" x2="664" y1="170.0" y2="170.0"/><text class="tick" x="48" y="174.0" text-anchor="end">40</text>
+<line class="grid" x1="56" x2="664" y1="97.0" y2="97.0"/><text class="tick" x="48" y="101.0" text-anchor="end">50</text>
+<line class="grid" x1="56" x2="664" y1="24.0" y2="24.0"/><text class="tick" x="48" y="28.0" text-anchor="end">60</text>
+<text class="tick x" x="56.0" y="336" text-anchor="middle">0</text>
+<text class="tick x" x="177.6" y="336" text-anchor="middle">20</text>
+<text class="tick x" x="299.2" y="336" text-anchor="middle">40</text>
+<text class="tick x" x="420.8" y="336" text-anchor="middle">60</text>
+<text class="tick x" x="542.4" y="336" text-anchor="middle">80</text>
+<text class="tick x" x="664.0" y="336" text-anchor="middle">100</text>
+<polyline class="s2" points="56.0,45.9 116.8,71.4 177.6,86.8 238.4,106.5 299.2,120.4 360.0,138.6 420.8,164.9 481.6,186.8 542.4,218.2 603.2,259.1 664.0,294.1"/>
+<polyline class="s1" points="56.0,40.8 116.8,59.0 177.6,78.8 238.4,97.0 299.2,116.7 360.0,138.6 420.8,162.7 481.6,188.2 542.4,216.0 603.2,249.6 664.0,294.1"/>
+<line class="cross" x1="0" x2="0" y1="24" y2="316" hidden/>
+<circle class="dot s1" r="5" hidden/><circle class="dot s2" r="5" hidden/>
+      </svg>
+      <div class="chart-tip" hidden></div>
+    </div>
+    <details>
+      <summary>Show data table</summary>
+      <p>Values traced from the original MATLAB plot.</p>
+      <table class="data">
+        <tr><th>State of charge (%)</th><th>Simulation (°C)</th><th>Test (°C)</th></tr>
+          <tr><td>0</td><td>57.7</td><td>57.0</td></tr>
+          <tr><td>10</td><td>55.2</td><td>53.5</td></tr>
+          <tr><td>20</td><td>52.5</td><td>51.4</td></tr>
+          <tr><td>30</td><td>50.0</td><td>48.7</td></tr>
+          <tr><td>40</td><td>47.3</td><td>46.8</td></tr>
+          <tr><td>50</td><td>44.3</td><td>44.3</td></tr>
+          <tr><td>60</td><td>41.0</td><td>40.7</td></tr>
+          <tr><td>70</td><td>37.5</td><td>37.7</td></tr>
+          <tr><td>80</td><td>33.7</td><td>33.4</td></tr>
+          <tr><td>90</td><td>29.1</td><td>27.8</td></tr>
+          <tr><td>100</td><td>23.0</td><td>23.0</td></tr>
+      </table>
+    </details>
+  </div>
+  <figcaption>Cell temperature (°C) vs state of charge (%) over a full discharge.</figcaption>
+  <script type="application/json" class="chart-data">{"t":[0,10,20,30,40,50,60,70,80,90,100],"sim":[57.7,55.2,52.5,50.0,47.3,44.3,41.0,37.5,33.7,29.1,23.0],"test":[57.0,53.5,51.4,48.7,46.8,44.3,40.7,37.7,33.4,27.8,23.0],"xRange":[0,100],"yRange":[20,60],"xUnit":"% SoC","yUnit":"°C","series":[{"key":"sim","label":"Sim"},{"key":"test","label":"Test"}]}</script>
+</figure>
 <h2>Gallery</h2>
-<!-- Replace each placeholder with: <a href="../assets/battery-testing-model/photo.jpg" data-caption="Caption."><img src="../assets/battery-testing-model/photo.jpg" alt="Description" loading="lazy"></a>
-     and copy the <dialog class="lightbox"> block from battery-pack.html below the gallery -->
 <div class="gallery">
-  <div class="ph">assets/battery-testing-model/photo-1.jpg</div>
-  <div class="ph">assets/battery-testing-model/photo-2.jpg</div>
-  <div class="ph">assets/battery-testing-model/photo-3.jpg</div>
+  <a href="../assets/battery-testing-model/cycler-setup.jpg" data-caption="The cycler test setup, with a Sony VTC6 cell under test."><img src="../assets/battery-testing-model/cycler-setup.jpg" alt="An Arbin Instruments battery tester and monitor beside a wire rack holding a clamped cell test fixture connected by heavy current cables" loading="lazy"></a>
+  <a href="../assets/battery-testing-model/module-thermal.jpg" data-caption="A 1s5p Enepaq VTC6 module tested to its thermal limits on an endurance current profile."><img src="../assets/battery-testing-model/module-thermal.jpg" alt="Thermal camera image of a five-cell module glowing red and white, with thermocouple wires attached and a maximum reading of 71.1 °C" loading="lazy"></a>
+  <a href="../assets/battery-testing-model/insulated-cell.jpg" data-caption="A cell wrapped in insulation to approximate adiabatic conditions. Keeping the heat in makes it easier to measure how much the cell generates, which I used to fit the thermal model."><img src="../assets/battery-testing-model/insulated-cell.jpg" alt="A battery cell wrapped in white insulation and tape, with current cables and thermocouple wires coming out of one end" loading="lazy"></a>
 </div>
+<dialog class="lightbox">
+  <figure>
+    <img src="" alt="">
+    <figcaption></figcaption>
+  </figure>
+  <button class="close" type="button" aria-label="Close">&times;</button>
+</dialog>
 <h2>Results</h2>
-<p>[Measurable outcomes and what the project achieved.]</p>
+<p>The testing changed how the team develops batteries. Mechanical engineers are now much more involved in cell selection, packaging, layout and cooling.</p>
+<p>It started with the FB26 pack. Testing its modules let me build a pack model early in the season, and the model showed that the pack needed active cooling to be competitive. Its existing design had no room for it. Knowing that, the team began working toward a battery redesign for 2028, built on what we learned over two seasons of building our first pack.</p>
+<p>For that redesign, the team tested eight candidate cells with HPPC across different loads, states of charge and temperatures. The resulting models showed how much a new pack could improve the car once we selected the best cell. The gain was larger than anything else on the car could offer, which made it clear that cell testing and modeling are the key to the car's performance in the years ahead.</p>
 <h2>What I'd do differently</h2>
-<p>[One or two honest lessons.]</p>
+<p>I'd break the system down into its parts before building a model of it. My early model of the FB26 pack left out the bus bar connections between modules, because I assumed their effect was small. Later testing showed they were what had been throwing the model off. If I had checked whether they were significant from the start, I'd have had an accurate model much sooner.</p>
   </article>
 
 </main>
