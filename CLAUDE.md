@@ -99,7 +99,7 @@ Plain HTML/CSS/JS. No build step, no framework, no npm. Keep it that way so Remu
 
 Not yet resolved (as of 2026-10-20):
 
-1. **Replace placeholder test data.** The internal resistance and thermal numbers are fake. The thermal chart is a static SVG built from a 41-point series; the same data is in the `.chart-data` JSON (for hover) and the data table. Update all three, including the `xRange`/`yRange` in the JSON if the axis ranges change.
+1. **Replace placeholder test data.** The internal resistance and thermal numbers are fake. Both sections are currently hidden from visitors (wrapped in `<div hidden>` on the battery pack page, 2026-10-26) until Remus gets the real data; unhide them when the data goes in. The thermal chart is a static SVG built from a 41-point series; the same data is in the `.chart-data` JSON (for hover) and the data table. Update all three, including the `xRange`/`yRange` in the JSON if the axis ranges change.
 2. **Model weight.** Accumulator (~40 MB, ~12M triangles, 23 translucent parts) and electronics box (~8 MB, ~2.7M triangles) are too heavy for phones. Remus chose to skip this for now. Also check the accumulator for flickering translucent parts.
 
 ## Don'ts
